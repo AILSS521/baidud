@@ -54,29 +54,6 @@ def show_preferences(button, self, app, variaVersion):
         if (self.appconf["check_for_updates_on_startup_enabled"] == '1'):
             update_actionrow.set_active("active")
 
-    # Browser extensions section:
-
-    browser_extension_actionrow = Adw.ActionRow()
-    browser_extension_actionrow.set_title(_("Browser Extension"))
-
-    browser_extension_firefox_button = Gtk.Button(label="Firefox")
-    browser_extension_firefox_button.set_halign(Gtk.Align.START)
-    browser_extension_firefox_button.set_valign(Gtk.Align.CENTER)
-    browser_extension_chrome_button = Gtk.Button(label="Chrome, Edge, Opera...")
-    browser_extension_chrome_button.set_halign(Gtk.Align.START)
-    browser_extension_chrome_button.set_valign(Gtk.Align.CENTER)
-
-    browser_extension_firefox_button.connect("clicked", lambda clicked: on_extension_selected(self, preferences, 'firefox'))
-    browser_extension_chrome_button.connect("clicked", lambda clicked: on_extension_selected(self, preferences, 'chrome'))
-
-    browser_extension_buttons_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=4)
-    browser_extension_buttons_box.append(browser_extension_firefox_button)
-    browser_extension_buttons_box.append(browser_extension_chrome_button)
-
-    browser_extension_actionrow.add_suffix(browser_extension_buttons_box)
-
-    group_extensions.add(browser_extension_actionrow)
-
     # Download directory:
 
     download_directory_actionrow = Adw.ActionRow()
@@ -235,7 +212,7 @@ def show_preferences(button, self, app, variaVersion):
 
     remote_aria2_expander_box = Adw.ExpanderRow()
     remote_aria2_expander_box.set_title(_("Remote Mode"))
-    remote_aria2_expander_box.set_subtitle(_("Use Varia as a GUI for a remote aria2c instance.") + "\n" + _("This will disable the video download functionality.") + "\n" + _("The browser extension will not work when Remote Mode is enabled."))
+    remote_aria2_expander_box.set_subtitle(_("Use Varia as a GUI for a remote aria2c instance."))
 
     remote_aria2_expander_switch = Gtk.Switch()
     remote_aria2_expander_switch.set_halign(Gtk.Align.START)
@@ -390,13 +367,6 @@ def speed_limit_text_filter(entry, self):
     if (new_text != text):
         GLib.idle_add(entry.set_text, new_text)
         GLib.idle_add(entry.set_position, -1)
-
-def on_extension_selected(self, prefswindow, browser):
-    if (browser == 'firefox'):
-        link = 'https://addons.mozilla.org/firefox/addon/varia-integrator/'
-    else:
-        link = 'https://chrome.google.com/webstore/detail/dacakhfljjhgdfdlgjpabkkjhbpcmiff'
-    Gio.AppInfo.launch_default_for_uri(link)
 
 def on_download_directory_change(self, directory_to_be_changed, prefswindow, actionrow):
     Gtk.FileDialog().select_folder(None, None, on_download_directory_selected, directory_to_be_changed, self, prefswindow, actionrow)
