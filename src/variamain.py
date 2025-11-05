@@ -240,7 +240,6 @@ class MainWindow(application_window):
             self.filter_button_show_all.set_active(False)
             self.filter_button_show_downloading.set_active(False)
             self.filter_button_show_completed.set_active(False)
-            self.filter_button_show_seeding.set_active(False)
             self.filter_button_show_failed.set_active(False)
 
             if self.overlay_split_view.get_show_sidebar() and \
@@ -266,10 +265,7 @@ class MainWindow(application_window):
                 for download_thread in self.downloads:
                     if (download_thread.download):
                         if download_thread.mode == "regular":
-                            if (((download_thread.download.status == "waiting") or (download_thread.download.status == "active")) and (download_thread.download.seeder != True)):
-                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
-                        elif download_thread.mode == "video":
-                            if download_thread.video_status == "downloading" or download_thread.video_status == "idle":
+                            if ((download_thread.download.status == "waiting") or (download_thread.download.status == "active")):
                                 download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
                 self.filter_button_show_downloading.set_active(True)
 
@@ -280,18 +276,7 @@ class MainWindow(application_window):
                         if download_thread.mode == "regular":
                             if (download_thread.download.status == "complete"):
                                 download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
-                        elif download_thread.mode == "video":
-                            if download_thread.video_status == "finished":
-                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
                 self.filter_button_show_completed.set_active(True)
-
-            elif (filter_mode == "show_seeding"):
-                self.applied_filter = "show_seeding"
-                for download_thread in self.downloads:
-                    if (download_thread.download):
-                        if (download_thread.mode == "regular") and (download_thread.download.seeder == True):
-                            download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
-                self.filter_button_show_seeding.set_active(True)
 
             else:
                 self.applied_filter = "show_failed"
@@ -299,9 +284,6 @@ class MainWindow(application_window):
                     if (download_thread.download):
                         if download_thread.mode == "regular":
                             if (download_thread.download.status == "error"):
-                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
-                        elif download_thread.mode == "video":
-                            if download_thread.video_status == "error":
                                 download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
                 self.filter_button_show_failed.set_active(True)
 
