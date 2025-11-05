@@ -1,0 +1,644 @@
+# Taiwanese Mandarin translation for Varia.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Varia package.
+# Julian Lai <s9209122222@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-04-13 22:08+0000\n"
+"Last-Translator: Giant Pink Robots! <giantpinkrobots@protonmail.com>\n"
+"Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
+"projects/varia/varia/zh_Hant/>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;download;下載;manager;管理員;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "基於 aria2 的下載管理員"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia 基於 aria2 且使用 GTK4 與 Libadwaita 以提供易用介面，並與 Gnome 良好整"
+"合的下載管理員"
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "這不是可用的網址。"
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "全部"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "進行中"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "已完成"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "關於 Varia"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "網址"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "下載"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "打開下載路徑"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "限速"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "全部暫停"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "網速"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "設定速限"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "全部取消"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/s"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "不限速"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "下載完成。"
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "已限制下載速度"
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "偵測到錯誤："
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "KB/s"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 B/s"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr " MB/s"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr " KB/s"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr " B/s"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "同時下載數量"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "全部復原"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr "基於 aria2 且使用 GTK4 與 Libadwaita 的下載管理員。"
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "這程式需依賴以下幾款軟體："
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr "全部協議可在此程式路徑中的 dependencies_information 內找到。"
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr "Julian Lai <s9209122222@gmail.com>"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "下載路徑"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "改變"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "限速"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "身份驗證"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "使用者名稱"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "密碼"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "驗證失敗。"
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "無法開啟目錄。"
+
+msgid "Remote Mode"
+msgstr "遠端模式"
+
+msgid "Remote aria2 IP"
+msgstr "遠端 aria2 IP"
+
+msgid "Remote aria2 Port"
+msgstr "遠端 aria2 連接埠"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "遠端 aria2 RPC 安全"
+
+msgid "Remote Download Location"
+msgstr "遠端下載位置"
+
+msgid "Exiting Varia..."
+msgstr "退出 Varia..."
+
+msgid "Background Mode"
+msgstr "背景模式"
+
+msgid "Continuing the downloads in the background."
+msgstr "在背景繼續下載。"
+
+msgid "Browser Extension"
+msgstr "瀏覽器擴充"
+
+msgid "Shutdown on Completion"
+msgstr "完成後關機"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia 即將關閉您的電腦。"
+
+msgid "Press Cancel to cancel and disable."
+msgstr "按取消可取消並停用。"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Warning"
+msgstr "警告"
+
+msgid "Monday"
+msgstr "星期一"
+
+msgid "Tuesday"
+msgstr "星期二"
+
+msgid "Wednesday"
+msgstr "星期三"
+
+msgid "Thursday"
+msgstr "星期四"
+
+msgid "Friday"
+msgstr "星期五"
+
+msgid "Saturday"
+msgstr "星期六"
+
+msgid "Sunday"
+msgstr "星期日"
+
+msgid "Start (h/m):"
+msgstr "開始 (時/分):"
+
+msgid "End (h/m):"
+msgstr "結束 (時/分):"
+
+msgid "Scheduler enabled"
+msgstr "調度程序已啟用"
+
+msgid "Scheduler"
+msgstr "調度程式"
+
+msgid "Enabled"
+msgstr "已啟用"
+
+msgid "Start downloading in these times"
+msgstr "在這些時間開始下載"
+
+msgid "Stop downloading in these times"
+msgstr "這些時候請停止下載"
+
+msgid "Add Timespan"
+msgstr "添加時間間隔"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "正在做種"
+
+msgid "Failed"
+msgstr "失敗的"
+
+msgid "Completion Options"
+msgstr "完成選項"
+
+msgid "Exit on Completion"
+msgstr "完成後退出"
+
+msgid "Varia is about to quit."
+msgstr "Varia即將退出。"
+
+msgid "Preferences"
+msgstr "首選設定"
+
+msgid "Other"
+msgstr "其他"
+
+msgid "Basic Settings"
+msgstr "基本設定"
+
+msgid "Advanced Settings"
+msgstr "進階設定"
+
+msgid "Use cookies.txt"
+msgstr "使用 cookies.txt"
+
+msgid "Import cookies.txt"
+msgstr "導入 cookies.txt"
+
+msgid "Remove cookies.txt"
+msgstr "刪除 cookies.txt"
+
+msgid "remaining"
+msgstr "剩下的"
+
+msgid "Start in Background Mode"
+msgstr "以背景模式啟動"
+
+msgid "Remote Timestamp"
+msgstr "遠端時間戳"
+
+msgid "Torrent"
+msgstr "種子"
+
+# Updater
+msgid "Checking for updates..."
+msgstr "正在檢查更新..."
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr "Varia 有新版本可用。您想要更新嗎？"
+
+msgid "Update available"
+msgstr "有更新可用"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Downloading update..."
+msgstr "正在下載更新…"
+
+msgid "Download failed."
+msgstr "下載失敗。"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "不"
+
+msgid "Automatically Check for Updates"
+msgstr "自動檢查更新"
+
+msgid "Check Now"
+msgstr "立即檢查"
+
+msgid "Do you want to check for updates on startup?"
+msgstr "啟動時想檢查更新嗎？"
+
+msgid "File"
+msgstr "檔案"
+
+msgid "Video / Audio"
+msgstr "影片/音訊"
+
+msgid "Video and audio"
+msgstr "影片和音訊"
+
+msgid "Video only"
+msgstr "僅限影片"
+
+msgid "Audio only"
+msgstr "僅音訊"
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr "幀率："
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr "位元速率："
+
+msgid "Checking video..."
+msgstr "正在檢查影片..."
+
+msgid "No video or audio streams found"
+msgstr "未找到視訊或音訊串流"
+
+msgid "Starting download..."
+msgstr "開始下載..."
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+"該影片平台可能不支持，或者您可能被該平台封鎖。如果您有活動的 VPN 連接，這可能"
+"是原因，或者您可以嘗試透過 cookies.txt 檔案匯入瀏覽器的 cookie。"
+
+msgid "This will disable the video download functionality."
+msgstr "這將停用影片下載功能。"
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr "部分{indicator}"
+
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "已超出同時下載限制，正在等待。"
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr "{number}%"
+
+msgid "Allow Seeding"
+msgstr "允許做種"
+
+msgid "Seeding Ratio Limit"
+msgstr "做種比率限制"
+
+msgid "Torrent Settings"
+msgstr "種子設定"
+
+msgid "Custom Download Directory for Torrents"
+msgstr "自訂種子下載目錄"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+"種子下載依賴人們對資料做種，禁用做種是令人非常厭惡的行為並且可能會導致您被某"
+"些客戶端和追蹤器限流或封禁。客戶端通常預期至少做種到與其下載相同的資料量（做"
+"種比率為 1）。相反地您可能更想要限製做種比率。"
+
+msgid "Cancel Seeding"
+msgstr "取消做種"
+
+# Save button
+msgid "Save"
+msgstr "儲存"
+
+msgid "Show Menu"
+msgstr "顯示選單"
+
+msgid "OK"
+msgstr ""
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent Settings"
+msgid "Enable Torrenting"
+msgstr "種子設定"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr ""
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+
+msgid "Torrenting is disabled."
+msgstr ""
+
+msgid "Unknown filesize"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show Menu"
+msgid "Show"
+msgstr "顯示選單"
+
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Quit"
+msgid "Quit"
+msgstr "離開"
+
+#, fuzzy
+#| msgid "Background Mode"
+msgid "Background Mode on Close"
+msgstr "背景模式"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr ""
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr ""
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr ""
+
+msgid "Varia will open automatically when the system starts."
+msgstr ""
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr ""
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Segments"
+msgstr "下載完成。"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Pause"
+msgstr "全部暫停"
+
+#, fuzzy
+#| msgid "Resume All"
+msgid "Resume"
+msgstr "全部復原"
+
+msgid "Stop"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "Open File"
+msgstr "檔案"
+
+msgid "Retry"
+msgstr ""
+
+msgid "Require Encryption"
+msgstr ""
+
+msgid "Get Country Info of Peers"
+msgstr ""
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+
+#, fuzzy
+#| msgid "Download failed."
+msgid "Download Details"
+msgstr "下載失敗。"
+
+msgid "Type"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "File Name"
+msgstr "檔案"
+
+#, fuzzy
+#| msgid "Download"
+msgid "Downloading"
+msgstr "下載"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Paused"
+msgstr "全部暫停"
+
+msgid "Percentage Downloaded"
+msgstr ""
+
+#, fuzzy
+#| msgid "remaining"
+msgid "Remaining"
+msgstr "剩下的"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Speed"
+msgstr "下載完成。"
+
+#, fuzzy
+#| msgid "Seeding"
+msgid "Seeding Speed"
+msgstr "正在做種"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Amount Downloaded"
+msgstr "下載完成。"
+
+msgid "Amount Uploaded"
+msgstr ""
+
+msgid "Ratio"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent"
+msgid "Torrent Peers"
+msgstr "種子"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "一般"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "顯示捷徑"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "離開"

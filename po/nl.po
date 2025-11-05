@@ -1,0 +1,651 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-04-13 22:08+0000\n"
+"Last-Translator: Giant Pink Robots! <giantpinkrobots@protonmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/varia/varia/nl/>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;download;beheerder;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "Een op aria2 gebaseerde downloadbeheerder"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia is een op aria2 gebaseerde downloadbeheerder. De toepassing maakt "
+"gebruik van GTK4 en Libadwaita en heeft daardoor een gebruiksvriendelijke "
+"vormgeving die integreert met GNOME."
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "De url is ongeldig."
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "Alles"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "In behandeling"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "Afgerond"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "Over Varia"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "Url"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "Downloaden"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "Downloadmap openen"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "Snelheidslimiet"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "Alles onderbreken"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "Snelheid"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "Snelheidslimiet instellen"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "Alles afbreken"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/s"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "Ongelimiteerd"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "Het downloaden is voltooid."
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "De downloadsnelheid is gelimiteerd."
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "Er is een fout opgetreden:"
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "KB/s"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 B/s"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr " MB/s"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr " KB/s"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr " B/s"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "Aantal gelijktijdige downloads"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "Alles hervatten"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr "Een op aria2 gebaseerde downloadbeheerder met GTK4 en Libadwaita."
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "Deze toepassing is afhankelijk van de volgende software:"
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr ""
+"De licenties van al deze software zijn te vinden in de map "
+"‘dependencies_information’ in de hoofdmap van deze toepassing."
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr "Heimen Stoffels <vistausss@fastmail.com>"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "Downloadmap"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "Wijzigen"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "Snelheid gelimiteerd"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "Verificatie"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "De verificatie is mislukt."
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "De map kan niet worden geopend."
+
+msgid "Remote Mode"
+msgstr "Op afstand"
+
+msgid "Remote aria2 IP"
+msgstr "Extern aria2-ip-adres"
+
+msgid "Remote aria2 Port"
+msgstr "Externe aria2-poort"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "Extern aria2-rpc-geheim"
+
+msgid "Remote Download Location"
+msgstr "Externe downloadlocatie"
+
+msgid "Exiting Varia..."
+msgstr "Bezig met afsluiten…"
+
+msgid "Background Mode"
+msgstr "Achtergrondmodus"
+
+msgid "Continuing the downloads in the background."
+msgstr "Het downloaden wordt op de achtergrond voortgezet."
+
+msgid "Browser Extension"
+msgstr "Browserextensie"
+
+msgid "Shutdown on Completion"
+msgstr "Afsluiten na afronden van downloads"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia staat op het punt om uw computer af te sluiten."
+
+msgid "Press Cancel to cancel and disable."
+msgstr "Druk annuleren af te breken."
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Warning"
+msgstr "Waarschuwing"
+
+msgid "Monday"
+msgstr "maandag"
+
+msgid "Tuesday"
+msgstr "dinsdag"
+
+msgid "Wednesday"
+msgstr "woensdag"
+
+msgid "Thursday"
+msgstr "donderdag"
+
+msgid "Friday"
+msgstr "vrijdag"
+
+msgid "Saturday"
+msgstr "zaterdag"
+
+msgid "Sunday"
+msgstr "zondag"
+
+msgid "Start (h/m):"
+msgstr "Begonnen op/om:"
+
+msgid "End (h/m):"
+msgstr "Afgerond op/om:"
+
+msgid "Scheduler enabled"
+msgstr "Planning ingeschakeld"
+
+msgid "Scheduler"
+msgstr "Planning"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "Start downloading in these times"
+msgstr "Downloaden op bepaalde tijdstippen"
+
+msgid "Stop downloading in these times"
+msgstr "Downloaden onderbreken op bepaalde tijdstippen"
+
+msgid "Add Timespan"
+msgstr "Tijdspanne toevoegen"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "Bezig met seeden…"
+
+msgid "Failed"
+msgstr "Mislukt"
+
+msgid "Completion Options"
+msgstr "Afrondacties"
+
+msgid "Exit on Completion"
+msgstr "Afsluiten na afronden"
+
+msgid "Varia is about to quit."
+msgstr "Varia staat op het punt om te worden afgesloten."
+
+msgid "Preferences"
+msgstr "Voorkeuren"
+
+msgid "Other"
+msgstr "Overig"
+
+msgid "Basic Settings"
+msgstr "Algemene voorkeuren"
+
+msgid "Advanced Settings"
+msgstr "Geavanceerde voorkeuren"
+
+msgid "Use cookies.txt"
+msgstr "cookies.txt gebruiken"
+
+msgid "Import cookies.txt"
+msgstr "cookies.txt importeren"
+
+msgid "Remove cookies.txt"
+msgstr "cookies.txt verwijderen"
+
+msgid "remaining"
+msgstr "overgebleven"
+
+msgid "Start in Background Mode"
+msgstr "Starten in achtergrondmodus"
+
+msgid "Remote Timestamp"
+msgstr "Tijdstempel op afstand"
+
+msgid "Torrent"
+msgstr "Torrent"
+
+# Updater
+msgid "Checking for updates..."
+msgstr "Controleren op updates.."
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr "Er is een nieuwe versie van Varia beschikbaar. Wilt u bijwerken?"
+
+msgid "Update available"
+msgstr "Update beschikbaar"
+
+msgid "Update"
+msgstr "Bijwerken"
+
+msgid "Downloading update..."
+msgstr "Update wordt gedownload..."
+
+msgid "Download failed."
+msgstr "Downloaden mislukt."
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "Automatically Check for Updates"
+msgstr "Automatisch controleren op updates"
+
+msgid "Check Now"
+msgstr "Controleer nu"
+
+msgid "Do you want to check for updates on startup?"
+msgstr "Wilt u bij opstarten controleren op updates?"
+
+msgid "File"
+msgstr "Bestand"
+
+msgid "Video / Audio"
+msgstr "Video / Audio"
+
+msgid "Video and audio"
+msgstr "Video and audio"
+
+msgid "Video only"
+msgstr "Alleen video"
+
+msgid "Audio only"
+msgstr "Alleen Audio"
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr "Framesnelheid:"
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr "Bitrate:"
+
+msgid "Checking video..."
+msgstr "Video controleren..."
+
+msgid "No video or audio streams found"
+msgstr "Geen video- of audiostream gevonden"
+
+msgid "Starting download..."
+msgstr "Downloaden starten..."
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+"Het videoplatform wordt mogelijk niet ondersteund of je wordt geblokkeerd "
+"door het platform. Als je een actieve VPN-verbinding hebt, kan dat de "
+"oorzaak zijn.  Probeer anders je browsercookies te importeren via een "
+"cookies.txt-bestand."
+
+msgid "This will disable the video download functionality."
+msgstr "Dit schakelt de videodownloadfunctionaliteit uit."
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr "Deel {indicator}"
+
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "Gelijktijdige downloadlimiet overschreden, wachten."
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr "{number}%"
+
+msgid "Allow Seeding"
+msgstr "Seeden toestaan"
+
+msgid "Seeding Ratio Limit"
+msgstr "Seedingratio Limiet"
+
+msgid "Torrent Settings"
+msgstr "Torrent instellingen"
+
+msgid "Custom Download Directory for Torrents"
+msgstr "Aangepaste downloadmap voor torrents"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+"Aangezien torrenting afhankelijk is van mensen die data seeden, wordt het "
+"sterk afgekeurd om seeding uit te schakelen. Dit kan ertoe leiden dat u "
+"wordt geknepen in snelheid (throttled) of wordt verbannen door bepaalde "
+"clients en trackers. Van clients wordt meestal verwacht dat ze minstens "
+"evenveel uploaden als ze downloaden (een ratio van 1). U kunt overwegen om "
+"in plaats daarvan uw seedingratio te beperken."
+
+msgid "Cancel Seeding"
+msgstr "Seeden annuleren"
+
+# Save button
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Show Menu"
+msgstr "Menu weergeven"
+
+msgid "OK"
+msgstr ""
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent Settings"
+msgid "Enable Torrenting"
+msgstr "Torrent instellingen"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr ""
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+
+msgid "Torrenting is disabled."
+msgstr ""
+
+msgid "Unknown filesize"
+msgstr ""
+
+#, fuzzy
+#| msgid "Show Menu"
+msgid "Show"
+msgstr "Menu weergeven"
+
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Quit"
+msgid "Quit"
+msgstr "Afsluiten"
+
+#, fuzzy
+#| msgid "Background Mode"
+msgid "Background Mode on Close"
+msgstr "Achtergrondmodus"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr ""
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr ""
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr ""
+
+msgid "Varia will open automatically when the system starts."
+msgstr ""
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr ""
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Segments"
+msgstr "Het downloaden is voltooid."
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Pause"
+msgstr "Alles onderbreken"
+
+#, fuzzy
+#| msgid "Resume All"
+msgid "Resume"
+msgstr "Alles hervatten"
+
+msgid "Stop"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "Open File"
+msgstr "Bestand"
+
+msgid "Retry"
+msgstr ""
+
+msgid "Require Encryption"
+msgstr ""
+
+msgid "Get Country Info of Peers"
+msgstr ""
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+
+#, fuzzy
+#| msgid "Download failed."
+msgid "Download Details"
+msgstr "Downloaden mislukt."
+
+msgid "Type"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "File Name"
+msgstr "Bestand"
+
+#, fuzzy
+#| msgid "Download"
+msgid "Downloading"
+msgstr "Downloaden"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Paused"
+msgstr "Alles onderbreken"
+
+msgid "Percentage Downloaded"
+msgstr ""
+
+#, fuzzy
+#| msgid "remaining"
+msgid "Remaining"
+msgstr "overgebleven"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Speed"
+msgstr "Het downloaden is voltooid."
+
+#, fuzzy
+#| msgid "Seeding"
+msgid "Seeding Speed"
+msgstr "Bezig met seeden…"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Amount Downloaded"
+msgstr "Het downloaden is voltooid."
+
+msgid "Amount Uploaded"
+msgstr ""
+
+msgid "Ratio"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent"
+msgid "Torrent Peers"
+msgstr "Torrent"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Algemeen"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Afsluiten"

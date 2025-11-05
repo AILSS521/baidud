@@ -1,0 +1,783 @@
+variaVersion = "v2025.10.14" # Also update actions-inno-install-script.iss
+
+import ctypes
+import gi
+import sys
+import time
+import json
+import os
+import threading
+import subprocess
+from operator import itemgetter
+import re
+import stringstorage
+import atexit
+import signal
+from multiprocessing.connection import Listener
+import socket
+import traceback
+
+from download.actionrow import on_download_clicked
+from download.listen import deal_with_simultaneous_download_limit
+from download.actionrow import create_actionrow
+from download.thread import DownloadThread
+gi.require_version('Gtk', '4.0')
+gi.require_version('Adw', '1')
+from gi.repository import Gtk, Adw, GLib, Gio, Gdk
+
+varia_server_host = '127.0.0.1'
+varia_server_port = 54682
+
+if os.name == 'nt':
+    application_window = Gtk.ApplicationWindow
+
+else:
+    application_window = Adw.ApplicationWindow
+    stringstorage.setstrings_linux()
+    from stringstorage import gettext as _
+
+class MainWindow(application_window):
+    def __init__(self, variaapp, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        from window.sidebar import window_create_sidebar
+        from window.content import window_create_content
+        from window.updater import windows_updater
+        from download.communicate import set_speed_limit, set_aria2c_download_directory, set_aria2c_custom_global_option
+        from initiate import initiate
+        from download.listen import listen_to_aria2
+        from download.scheduler import schedule_downloads
+
+        self.scheduler_currently_downloading = False
+        self.appdir = appdir
+        self.appconf = appconf
+        self.aria2c_subprocess = aria2c_subprocess
+        self.bindir = aria2cexec[:-6]
+        self.aria2cexec = aria2cexec
+        self.remote_successful = False
+        self.update_executable = None
+        self.ffmpegexec = ffmpegexec
+        self.tray_connection_thread_stop = False
+        self.tray_process = None
+        self.ip_geolocation_cache = {}
+
+        # Set up variables and all:
+        aria2_connection_successful = initiate(self, variaapp, variaVersion, first_run, issnap)
+
+        if (aria2_connection_successful == -1):
+            return
+
+        # Create window contents:
+        window_create_sidebar(self, variaapp, variaVersion)
+        window_create_content(self)
+
+        if self.appconf["schedule_enabled"] == 1:
+            try:
+                self.sidebar_content_box.remove(self.sidebar_scheduler_label)
+            except:
+                pass
+            self.sidebar_content_box.append(self.sidebar_scheduler_label)
+
+        # Check if the download path still exists:
+        if not (os.path.exists(self.appconf["download_directory"])):
+            if GLib.get_user_special_dir(GLib.DIRECTORY_DOWNLOAD) and os.path.exists(GLib.get_user_special_dir(GLib.DIRECTORY_DOWNLOAD)):
+                self.appconf["download_directory"] = GLib.get_user_special_dir(GLib.DIRECTORY_DOWNLOAD)
+            elif GLib.get_user_special_dir(GLib.DIRECTORY_HOME):
+                self.appconf["download_directory"] = GLib.get_user_special_dir(GLib.DIRECTORY_HOME)
+            else:
+                self.appconf["download_directory"] = os.path.expanduser("~")
+            self.save_appconf()
+
+        # Set download speed limit from appconf:
+        if ((self.appconf["download_speed_limit_enabled"] == "1") and (self.appconf["download_speed_limit"][:-1] != "0")):
+            set_speed_limit(self, self.appconf["download_speed_limit"])
+
+        # Set download speed limit from appconf:
+        if ((self.appconf["download_speed_limit_enabled"] == "1") and (self.appconf["download_speed_limit"][:-1] != "0")):
+            set_speed_limit(self, self.appconf["download_speed_limit"])
+
+        # Set download directory from appconf:
+        set_aria2c_download_directory(self)
+
+        # Set the maximum simultaneous download amount from appconf:
+        #set_aria2c_download_simultaneous_amount(self)
+        set_aria2c_custom_global_option(self, "max-concurrent-downloads", str(self.appconf["download_simultaneous_amount"]))
+
+        # Set the download segments:
+        set_aria2c_custom_global_option(self, "split", str(self.appconf["download_segments"]))
+
+        # Start checking for simultaneous download amount limit:
+        thread = threading.Thread(target=lambda: deal_with_simultaneous_download_limit(self), daemon=True)
+        thread.start()
+
+        # Set the remote time setting:
+        if self.appconf["remote_time"] == "1":
+            set_aria2c_custom_global_option(self, "remote-time", "true")
+        else:
+            set_aria2c_custom_global_option(self, "remote-time", "false")
+
+        # Listen to aria2c:
+        thread = threading.Thread(target=lambda: listen_to_aria2(self, variaapp), daemon=True)
+        thread.start()
+
+        # Begin the scheduler:
+        thread = threading.Thread(target=lambda: schedule_downloads(self, True), daemon=True)
+        thread.start()
+
+        # Windows only stuff:
+        if (os.name == 'nt'):
+            os.environ['GTK_CSD'] = '0'
+            icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
+            icon_theme.add_search_path("./icons")
+            if (self.appconf["check_for_updates_on_startup_enabled"] == '1') and (os.path.exists("./updater-function-enabled")):
+                windows_updater(None, self, variaapp, None, variaVersion, 0)
+
+        # Load incomplete downloads:
+        default_state = {"url": None, "filename": None, "type": "regular", "paused": False, "index": 0, "dir": self.appconf["download_directory"]}
+        download_dicts = []
+
+        for filename in os.listdir(self.appconf["download_directory"]):
+            if (os.path.isdir(filename) == False) and ( (filename.endswith('.varia.json')) or (filename.endswith('.varia')) ):
+                if (filename.endswith(".varia.json")):
+                    current_filename = filename.replace(".json", "")
+                    os.rename(os.path.join(self.appconf["download_directory"], filename), os.path.join(self.appconf["download_directory"], current_filename))
+                else:
+                    current_filename = filename
+
+                with open(os.path.join(self.appconf["download_directory"], current_filename), 'r') as f:
+                    loaded_state = json.load(f)
+                    state = {**default_state, **loaded_state}
+
+                    download_dicts.append(state)
+
+                print(current_filename)
+                os.remove(os.path.join(self.appconf["download_directory"], current_filename))
+
+        download_dicts = sorted(download_dicts, key=itemgetter("index"))
+
+        for download in download_dicts:
+            on_download_clicked(None, self, download["url"], download["filename"], None, download["type"], download["paused"], download["dir"])
+
+        self.check_all_status() # Set Pause All / Resume All button
+
+        self.connect('close-request', self.exit_or_tray, variaapp)
+        self.connect("notify::default-width", self.on_window_resize)
+        self.connect("notify::maximized", self.on_window_resize)
+        GLib.timeout_add(100, self.on_window_resize, None, None)
+
+        self.tray_notification = False
+
+        self.present()
+
+        # Start in background mode if it was enabled in preferences:
+        if (self.appconf["default_mode"] == "background"):
+            self.suppress_startup_notification = True
+            self.exitProgram(app=self, variaapp=variaapp, background=True)
+        else:
+            self.suppress_startup_notification = False
+
+        if self.appconf["tray_always_visible"] == "true":
+            self.start_tray_process(variaapp)
+
+    def start_tray_process(self, variaapp):
+        if self.tray_process == None: # If tray process is not already running
+            if os.name == 'nt':
+
+                if os.path.exists(os.path.join(os.getcwd(), 'tray', 'varia-tray.exe')): # Built with PyInstaller
+                    tray_subprocess_input = [os.path.join(os.getcwd(), 'tray', 'varia-tray.exe'), _("Show"), _("Quit")]
+
+                else: # Running standalone
+                    tray_subprocess_input = [sys.executable, os.path.join(os.path.dirname(__file__), 'tray', 'tray_windows.py'), _("Show"), _("Quit")]
+
+            else:
+                tray_subprocess_input = [sys.executable, os.path.join(os.path.dirname(__file__), 'tray', 'tray_linux.py'), _("Show"), _("Quit")]
+
+            def tray_process_connection():
+                address = ('localhost', 6802)
+                listener = Listener(address, authkey=b'varia-tray-process')
+
+                print("Waiting for tray process connection...")
+                conn = listener.accept()
+                print("Connected to the tray icon process.")
+
+                self.tray_connection_thread_stop = False
+
+                while True:
+                    if self.tray_connection_thread_stop:
+                        break
+
+                    try:
+                        message = conn.recv()
+                        print("Tray icon pressed function: ", message)
+
+                        if message == "show":
+                            self.unminimize()
+                            self.set_visible(True)
+                            self.present()
+                            if self.appconf["tray_always_visible"] != "true":
+                                self.tray_process.kill()
+                                self.tray_process = None
+
+                        elif message == "quit":
+                            self.exitProgram(self, variaapp, False)
+                            break
+
+                    except EOFError:
+                        break
+
+            # Tray icon process must be separate as libayatana-appindicator relies on Gtk 3.
+            self.tray_process = subprocess.Popen(
+                tray_subprocess_input
+            )
+
+            global tray_process_global
+            tray_process_global = self.tray_process
+
+            self.tray_process_connection_thread = threading.Thread(target=tray_process_connection, daemon=True).start()
+
+    def filter_download_list(self, button, filter_mode):
+        if (button != "no"):
+            self.filter_button_show_all.set_active(False)
+            self.filter_button_show_downloading.set_active(False)
+            self.filter_button_show_completed.set_active(False)
+            self.filter_button_show_seeding.set_active(False)
+            self.filter_button_show_failed.set_active(False)
+
+            if self.overlay_split_view.get_show_sidebar() and \
+                self.overlay_split_view.get_collapsed():
+
+                self.overlay_split_view.set_show_sidebar(False)
+
+        else:
+            filter_mode = self.applied_filter
+
+        if (filter_mode == "show_all"):
+            self.applied_filter = "show_all"
+            for download_thread in self.downloads:
+                download_thread.actionrow.set_visible(True)
+            self.filter_button_show_all.set_active(True)
+
+        else:
+            for download_thread in self.downloads:
+                download_thread.actionrow.set_visible(False)
+
+            if (filter_mode == "show_downloading"):
+                self.applied_filter = "show_downloading"
+                for download_thread in self.downloads:
+                    if (download_thread.download):
+                        if download_thread.mode == "regular":
+                            if (((download_thread.download.status == "waiting") or (download_thread.download.status == "active")) and (download_thread.download.seeder != True)):
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                        elif download_thread.mode == "video":
+                            if download_thread.video_status == "downloading" or download_thread.video_status == "idle":
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                self.filter_button_show_downloading.set_active(True)
+
+            elif (filter_mode == "show_completed"):
+                self.applied_filter = "show_completed"
+                for download_thread in self.downloads:
+                    if (download_thread.download):
+                        if download_thread.mode == "regular":
+                            if (download_thread.download.status == "complete"):
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                        elif download_thread.mode == "video":
+                            if download_thread.video_status == "finished":
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                self.filter_button_show_completed.set_active(True)
+
+            elif (filter_mode == "show_seeding"):
+                self.applied_filter = "show_seeding"
+                for download_thread in self.downloads:
+                    if (download_thread.download):
+                        if (download_thread.mode == "regular") and (download_thread.download.seeder == True):
+                            download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                self.filter_button_show_seeding.set_active(True)
+
+            else:
+                self.applied_filter = "show_failed"
+                for download_thread in self.downloads:
+                    if (download_thread.download):
+                        if download_thread.mode == "regular":
+                            if (download_thread.download.status == "error"):
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                        elif download_thread.mode == "video":
+                            if download_thread.video_status == "error":
+                                download_thread.actionrow.set_visible(download_thread.actionrow.is_visible)
+                self.filter_button_show_failed.set_active(True)
+
+    def escape_special_characters(self, string):
+        return re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])').sub('', string).replace("&", "&amp;")
+
+    # Drag and drop:
+
+    def on_drag_enter(self, target, x, y):
+        self.root_window_overlay.add_overlay(self.drag_drop_revealer)
+        self.drag_drop_revealer.set_reveal_child(True)
+        return 0
+
+    def on_drag_leave(self, target, timeout_milliseconds):
+        GLib.timeout_add(timeout_milliseconds - 250, self.drag_drop_revealer.set_reveal_child, False)
+        GLib.timeout_add(timeout_milliseconds, self.root_window_overlay.remove_overlay, self.drag_drop_revealer)
+        GLib.timeout_add(timeout_milliseconds, self.drag_drop_status_page.remove_css_class, "drag_drop_status_page_error")
+        GLib.timeout_add(timeout_milliseconds, self.drag_drop_status_page.remove_css_class, "drag_drop_status_page_success")
+        GLib.timeout_add(timeout_milliseconds, self.drag_drop_status_page.add_css_class, "drag_drop_status_page")
+        GLib.timeout_add(timeout_milliseconds, self.drag_drop_status_page.set_icon_name, "document-send-symbolic")
+
+        return 0
+
+    def on_file_drop(self, target, value, x, y):
+        timeout_milliseconds = 1000
+
+        if timeout_milliseconds == 1000:
+            self.drag_drop_status_page.remove_css_class("drag_drop_status_page")
+            self.drag_drop_status_page.add_css_class("drag_drop_status_page_error")
+            self.drag_drop_status_page.set_icon_name("media-playback-stop-symbolic")
+
+        GLib.idle_add(self.on_drag_leave, None, timeout_milliseconds)
+        return 0
+
+    # Adaptive layout stuff:
+
+    def on_window_resize(self, widget, param):
+        GLib.idle_add(self.apply_window_resize)
+        GLib.timeout_add(50, self.apply_window_resize)
+    
+    def apply_window_resize(self):
+        if self.root_window_overlay.get_width() < 600:
+            self.header_show_sidebar_button_revealer.set_reveal_child(True)
+            self.status_page_begin_button_revealer.set_reveal_child(True)
+            self.overlay_split_view.set_show_sidebar(False)
+
+        else:
+            self.header_show_sidebar_button_revealer.set_reveal_child(False)
+            self.status_page_begin_button_revealer.set_reveal_child(False)
+            self.overlay_split_view.set_collapsed(False)
+            self.overlay_split_view.set_show_sidebar(True)
+
+    def total_download_speed_get(self, downloads, total_download_speed_label):
+        while (self.terminating == False):
+            total_download_speed = 0
+            total_completed_download_amount = 0
+
+            for download_thread in downloads:
+                total_download_speed += download_thread.speed
+
+                if download_thread.is_complete:
+                    total_completed_download_amount += 1
+
+            if (total_download_speed == 0):
+                download_speed_text = "0" + _(" B/s")
+            elif (total_download_speed < 1024):
+                download_speed_text = str(total_download_speed) + _(" B/s")
+            elif ((total_download_speed >= 1024) and (total_download_speed < 1048576)):
+                download_speed_text = str(round(total_download_speed / 1024, 2)) + _(" KB/s")
+            else:
+                download_speed_text = str(round(total_download_speed / 1024 / 1024, 2)) + _(" MB/s")
+
+            if len(downloads) > 0:
+                download_speed_text = f"{download_speed_text}  ·  {total_completed_download_amount}/{len(downloads)}"
+
+            GLib.idle_add(total_download_speed_label.set_text, download_speed_text)
+
+            time.sleep(0.5)
+
+    def pause_all(self):
+        if len(self.downloads) > 0:
+            if self.all_paused:
+                for download_thread in self.downloads:
+                    download_thread.resume()
+
+            else:
+                for download_thread in self.downloads:
+                    download_thread.pause(False)
+
+    def check_all_status(self):
+        if len(self.downloads) == 0:
+            self.all_paused = False
+            self.header_pause_content.set_icon_name("media-playback-pause-symbolic")
+            self.header_pause_content.set_label(_("Pause All"))
+            self.header_pause_button.set_sensitive(False)
+
+            GLib.idle_add(self.header_pause_button.set_sensitive, False)
+            self.content_root_overlay.add_overlay(self.status_page_widget)
+        
+        else:
+            all_paused = True
+
+            for download_item in self.downloads.copy():
+                if download_item.is_complete == False and download_item.cancelled == False and download_item.paused == False:
+                    all_paused = False
+                    break
+
+            if all_paused:
+                self.all_paused = True
+                self.header_pause_content.set_icon_name("media-playback-start-symbolic")
+                self.header_pause_content.set_label(_("Resume All"))
+                self.header_pause_button.set_sensitive(True)
+            
+            else:
+                self.all_paused = False
+                self.header_pause_content.set_icon_name("media-playback-pause-symbolic")
+                self.header_pause_content.set_label(_("Pause All"))
+                self.header_pause_button.set_sensitive(True)
+
+    def stop_all(self, app, variaapp):
+        while self.downloads != []:
+            for download_item in self.downloads:
+                download_item.stop()
+
+        self.header_pause_content.set_icon_name("media-playback-pause-symbolic")
+        self.header_pause_content.set_label(_("Pause All"))
+        self.header_pause_button.set_sensitive(False)
+        self.content_root_overlay.add_overlay(self.status_page_widget)
+
+    def save_appconf(self):
+        with open(os.path.join(self.appdir, 'varia.conf'), 'w') as f:
+            json.dump(self.appconf, f)
+        print("Config saved")
+
+    def save_window_size(self):
+        self.appconf['window_size'] = self.get_default_size()
+        self.save_appconf()
+
+    def exit_or_tray(self, app, variaapp):
+        if self.appconf["use_tray"] == "true":
+            self.exitProgram(self, variaapp, True)
+
+        else:
+            self.exitProgram(self, variaapp, False)
+
+        return True
+
+    def exitProgram(self, app, variaapp, background):
+        if background:
+            self.set_visible(False)
+            self.start_tray_process(variaapp)
+
+            if self.suppress_startup_notification:
+                self.suppress_startup_notification = False
+                return
+
+            if not self.tray_notification:
+                notification = Gio.Notification.new(_("Background Mode"))
+                notification.set_body(_("Continuing the downloads in the background."))
+                notification.set_title(_("Background Mode"))
+                variaapp.send_notification(None, notification)
+                self.tray_notification = True
+
+            print('Background mode')
+
+        else:
+            self.terminating = True
+            self.all_paused = False
+
+            if (self.remote_successful == False):
+                self.pause_all()
+                self.api.client.shutdown()
+
+                if (self.is_visible() == False):
+                    self.set_visible(True)
+
+                # Kill the tray icon process
+                if self.tray_process:
+                    self.tray_process.kill()
+                    self.tray_connection_thread_stop = True
+
+                exiting_dialog = Adw.AlertDialog()
+                exiting_dialog_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=25)
+                exiting_dialog.set_child(exiting_dialog_box)
+                exiting_dialog_box.set_margin_top(30)
+                exiting_dialog_box.set_margin_bottom(30)
+                exiting_dialog_box.set_margin_start(60)
+                exiting_dialog_box.set_margin_end(60)
+                exiting_dialog_spinner = Adw.Spinner()
+                exiting_dialog_spinner.set_size_request(30, 30)
+                exiting_dialog_box.append(exiting_dialog_spinner)
+                exiting_dialog_label = Gtk.Label(label=_("Exiting Varia..."))
+                exiting_dialog_label.add_css_class("title-1")
+                exiting_dialog_box.append(exiting_dialog_label)
+                exiting_dialog.set_can_close(False)
+                GLib.idle_add(exiting_dialog.present, self)
+
+                GLib.timeout_add(3000, self.aria2c_exiting_check, app, 0, variaapp, exiting_dialog)
+
+            else:
+                self.save_window_size()
+                self.destroy()
+                variaapp.quit()
+
+                if self.update_executable != None:
+                    subprocess.Popen([self.update_executable, "/SILENT", "SUPPRESSMSGBOXES", "SP-", "/NOICONS", "/MERGETASKS=\"!desktopicon\"", "&&", os.path.join(os.getcwd(), "variamain.exe")], shell=True)
+
+    def aria2c_exiting_check(self, app, counter, variaapp, exiting_dialog):
+        print(counter)
+        if ((counter <= 20) and (self.aria2c_subprocess.poll() is None)):
+            counter += 1
+            GLib.timeout_add(250, self.aria2c_exiting_check, app, counter, variaapp, exiting_dialog)
+        else:
+            self.aria2c_subprocess.terminate()
+            self.aria2c_subprocess.wait()
+            if (exiting_dialog is not None):
+                exiting_dialog.force_close()
+            self.save_window_size()
+            self.destroy()
+
+            try:
+                variaapp.quit()
+
+            except:
+                pass # No need to
+
+            for thread in threading.enumerate():
+                print(thread.name)
+
+            if self.update_executable != None:
+                subprocess.Popen([self.update_executable, "/SILENT", "SUPPRESSMSGBOXES", "SP-", "/NOICONS", "/MERGETASKS=\"!desktopicon\"", "&&", os.path.join(os.getcwd(), "variamain.exe")], shell=True)
+
+            return
+
+    def quit_action_received(self, variaapp):
+        if (self.terminating == False):
+            self.exitProgram(variaapp, variaapp, False)
+
+def handle_connection(sock):
+    while True:
+        conn, _ = sock.accept()
+        data = conn.recv(1024).decode()
+        if data:
+            data = json.loads(data)
+            myapp.add_downloads(data)
+        conn.close()
+        time.sleep(0.5)
+
+def start_varia_server():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+        server.bind((varia_server_host, varia_server_port))
+
+    except OSError:
+        return False # Another Varia instance is already running
+
+    server.listen(1)
+    threading.Thread(target=handle_connection, args=(server,), daemon=True).start()
+    return True
+   
+def send_to_varia_instance(message):
+    try:
+        with socket.create_connection((varia_server_host, varia_server_port), timeout=2) as sock:
+            sock.sendall(message.encode())
+
+    except OSError:
+        print("Couldn't contact existing instance.")
+
+class MyApp(Adw.Application):
+    def __init__(self, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, arguments, **kwargs):
+        super().__init__(**kwargs)
+        self.connect('activate', self.on_activate, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, arguments)
+        quit_action = Gio.SimpleAction.new("quit", None)
+        quit_action.connect("activate", self.quit_action)
+        self.add_action(quit_action)
+        self.initiated = False
+    
+    def do_open(self, files, *args):
+        arguments = []
+
+        for item in files:
+            arguments.append(item.get_uri())
+            print(item)
+        
+        self.add_downloads(arguments)
+
+    def on_activate(self, app, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, arguments):
+        if not hasattr(self, 'win'):
+            self.win = MainWindow(application=app, variaapp=self, appdir=appdir, appconf=appconf, first_run=first_run, aria2c_subprocess=aria2c_subprocess, aria2cexec=aria2cexec, ffmpegexec=ffmpegexec, issnap=issnap)
+
+        try:
+            if ((self.win.terminating == False) and ((appconf["default_mode"] == "visible") or (self.initiated == True))):
+                self.win.present()
+        except:
+            return -1
+
+        self.initiated = True
+
+        if len(arguments) > 0:
+            self.add_downloads(arguments)
+        
+        if os.name == 'nt':
+            # On Windows we use Gtk.ApplicationWindow which causes an issue where the dialogs that are shown on top
+            # don't seem to disable (unfocus) the window/widget below - even if it does. So we manually override
+            # the realize and close signals of Gtk.Widget for Adw.Dialog to set the parent widget sensitivity
+            # to True or False.
+            class AdwDialogForWindows(Adw.Dialog):
+                def __init__(self, **kwargs):
+                    super().__init__(**kwargs)
+                    self.connect_after("realize", dialog_show)
+                    self.connect_after("closed", dialog_close)
+            
+                def present(self, parent=None):
+                    if parent is not None:
+                        self._parentwidget = parent
+                    super().present(parent)
+            
+            def dialog_show(dialog):
+                if dialog._parentwidget:
+                    dialog._parentwidget.set_sensitive(False)
+            
+            def dialog_close(dialog):
+                if dialog._parentwidget:
+                    dialog._parentwidget.set_sensitive(True)
+
+            Adw.Dialog = AdwDialogForWindows
+
+    def add_downloads(self, arguments):
+        self.win.present()
+
+    def quit_action(self, action, parameter):
+        self.win.quit_action_received(self)
+
+def main(version, aria2cexec, ffmpegexec, issnap, arguments):
+    if (os.name == 'nt'): # Varia server only used on Windows to send data to the already running instance.
+        if not start_varia_server():
+            send_to_varia_instance(arguments)
+            return
+            sys.exit()
+
+    if "FLATPAK_ID" in os.environ:
+        appdir = os.path.join('/var', 'data')
+    else:
+        appdir = os.path.join(os.path.expanduser('~'), '.varia')
+        if not os.path.exists(appdir):
+            os.makedirs(appdir)
+
+    download_directory = ''
+
+    try:
+        if (os.path.exists(GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD))):
+            download_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD)
+        else:
+            download_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_HOME)
+    except AttributeError:
+        print("Can't find GLib user special dirs")
+        download_directory = os.path.expanduser("~")
+
+    appconf = {
+        'window_size': [800, 630],
+        'download_speed_limit_enabled': '0',
+        'download_speed_limit': '0',
+        'auth': '0',
+        'auth_username': '',
+        'auth_password': '',
+        'download_directory': download_directory,
+        'download_simultaneous_amount': '5',
+        'download_segments': '5',
+        'remote': '0',
+        'remote_protocol': 'https://',
+        'remote_ip': '',
+        'remote_port': '',
+        'remote_secret': '',
+        'remote_location': '',
+        'schedule_enabled': '0',
+        'default_mode': 'visible',
+        'use_tray': 'false',
+        'tray_always_visible': 'false',
+        'schedule_mode': 'inclusive',
+        'schedule': [],
+        'remote_time': '0',
+        'check_for_updates_on_startup_enabled': '0',
+        'autostart_on_boot_enabled': 'false'}
+
+    if os.path.exists(os.path.join(appdir, 'varia.conf')):
+        first_run = False
+        with open(os.path.join(appdir, 'varia.conf'), 'r') as f:
+            appconf.update(json.load(f))
+
+    else:
+        first_run = True
+        with open(os.path.join(appdir, 'varia.conf'), 'w') as f:
+            json.dump(appconf, f)
+
+    global aria2c_subprocess
+    aria2c_subprocess = None
+
+    aria2_config = [
+        "--enable-rpc",
+        "--rpc-listen-port=6801",
+        "--allow-overwrite=false",
+        "--auto-file-renaming=true",
+        "--min-split-size=1M",
+        "--http-accept-gzip=true",
+        "--disk-cache=128M",
+        "--split=32",
+        "--max-connection-per-server=16"]
+
+    if (appconf['remote'] == '0'):
+        if (os.name == 'nt'):
+            aria2c_subprocess = subprocess.Popen([aria2cexec] + aria2_config, shell=True, creationflags=subprocess.CREATE_NEW_PROCESS_GROUP)
+
+        else:
+            if hasattr(os, 'posix_fallocate'):
+                aria2_config.append("--file-allocation=falloc") # Set fallocate on Linux for better performance
+                print("fallocate enabled.")
+                aria2c_subprocess = subprocess.Popen([aria2cexec] + aria2_config, preexec_fn=os.setsid)
+
+            else:
+                aria2c_subprocess = subprocess.Popen([aria2cexec] + aria2_config, preexec_fn=os.setsid)
+
+    atexit.register(stop_subprocesses_and_exit)
+
+    signal.signal(signal.SIGINT, stop_subprocesses_and_exit)
+    #signal.signal(signal.SIGTERM, stop_subprocesses_and_exit) # causes issues with other subprocesses
+    sys.excepthook = global_exception_handler
+
+    arguments = json.loads(arguments)
+    global myapp
+    myapp = MyApp(appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, arguments, application_id="io.github.giantpinkrobots.varia", flags=Gio.ApplicationFlags.HANDLES_OPEN)
+
+    try:
+        myapp.run()
+    
+    finally: # Kill subprocesses if they're running (in case of a crash)
+        stop_subprocesses_and_exit()
+
+def global_exception_handler(exctype, value, tb):
+    traceback.print_exception(exctype, value, tb)
+    stop_subprocesses_and_exit()
+
+def stop_subprocesses_and_exit(*args):
+    print("*** Varia has stopped ***")
+    
+    if "tray_process_global" in locals() and tray_process_global.poll() is None:
+        tray_process_global.kill()
+        myapp.win.tray_connection_thread_stop = True
+    
+    if "aria2c_subprocess" in locals() and aria2c_subprocess.poll() is None:
+        myapp.win.api.client.shutdown()
+        aria2c_subprocess.wait()
+    
+    try:
+        myapp.win.destroy()
+        myapp.quit()
+        sys.exit()
+    
+    except:
+        return
+
+if ((__name__ == '__main__') and (os.name == 'nt')):
+    import gettext
+    import ctypes
+    import locale
+
+    os.chdir(os.path.dirname(sys.executable))
+    windll = ctypes.windll.kernel32
+    lang_id = windll.GetUserDefaultUILanguage()
+    current_locale = locale.windows_locale.get(lang_id)
+    print(current_locale)
+
+    translation = gettext.translation('varia', localedir='./locale', languages=[current_locale], fallback=True)
+
+    stringstorage.setstrings_win(translation.gettext)
+
+    from stringstorage import gettext as _
+
+    sys.exit(main(variaVersion, os.path.join(os.getcwd(), "aria2c.exe"), os.path.join(os.getcwd(), "ffmpeg.exe"), False, json.dumps(sys.argv)))

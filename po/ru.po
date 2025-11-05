@@ -1,0 +1,629 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Varia\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-10-05 12:02+0000\n"
+"Last-Translator: Yurt Page <yurtpage+weblate@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/varia/varia/ru/>"
+"\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural="
+"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 5.14-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;download;manager;загрузка;загрузить;скачать;менеджер;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "Менеджер загрузок на основе aria2"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia - это менеджер загрузок, основанный на aria2, который использует GTK4 "
+"и Libadwaita для создания простого в использовании интерфейса, который "
+"хорошо интегрируется с рабочим столом GNOME."
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "Это неправильный URL-адрес."
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "Все"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "В процессе"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "Завершено"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "О приложении"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "URL-адрес"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "Загрузить"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "Открыть папку загрузки"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "Ограничение скорости"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "Приостановить все"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "Скорость"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "Установить ограничение скорости"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "Отменить все"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/с"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "Без ограничений"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "Загрузка завершена."
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "Скорость загрузки ограничена."
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "Произошла ошибка:"
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "Мбайт/с"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "Кбайт/с"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 Байт/с"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr " Мбайт/с"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr " Кбайт/с"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr " Байт/с"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "Количество одновременных загрузок"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "Возобновить все"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr "Менеджер загрузок на основе aria2, использующий GTK4 и Libadwaita."
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "Это приложение использует следующие части программного обеспечения:"
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr ""
+"Лицензии всех этих программных продуктов можно найти в каталоге "
+"dependencies_information в этом приложении."
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr "Aleksandr Melman <Alexmelman88@gmail.com>, 2023"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "Папка загрузки"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "Изменить"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "Скорость ограничена"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "Аутентификация"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "Пароль"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "Авторизация не удалась."
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "Не удалось открыть каталог."
+
+msgid "Remote Mode"
+msgstr "Удаленный режим"
+
+msgid "Remote aria2 IP"
+msgstr "Удаленный IP aria2"
+
+msgid "Remote aria2 Port"
+msgstr "Удаленный порт aria2"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "Удаленный RPC Secret aria2"
+
+msgid "Remote Download Location"
+msgstr "Удаленное расположение загрузки"
+
+msgid "Exiting Varia..."
+msgstr "Выход из Varia..."
+
+msgid "Background Mode"
+msgstr "Фоновый режим"
+
+msgid "Continuing the downloads in the background."
+msgstr "Продолжение загрузки в фоновом режиме."
+
+msgid "Browser Extension"
+msgstr "Расширение для браузера"
+
+msgid "Shutdown on Completion"
+msgstr "Выключить устройство после завершения"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia собирается выключить ваш компьютер."
+
+msgid "Press Cancel to cancel and disable."
+msgstr "Нажмите Отменить для отмены и отключения."
+
+msgid "Cancel"
+msgstr "Отменить"
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "Start (h/m):"
+msgstr "Начало (ч/м):"
+
+msgid "End (h/m):"
+msgstr "Конец (ч/м):"
+
+msgid "Scheduler enabled"
+msgstr "Планировщик включен"
+
+msgid "Scheduler"
+msgstr "Планировщик"
+
+msgid "Enabled"
+msgstr "Включено"
+
+msgid "Start downloading in these times"
+msgstr "Начать загрузку в это время"
+
+msgid "Stop downloading in these times"
+msgstr "Остановить загрузку в это время"
+
+msgid "Add Timespan"
+msgstr "Добавить временной интервал"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "Раздача"
+
+msgid "Failed"
+msgstr "Не удалось"
+
+msgid "Completion Options"
+msgstr "Параметры завершения"
+
+msgid "Exit on Completion"
+msgstr "Выйти после завершения"
+
+msgid "Varia is about to quit."
+msgstr "Приложение завершает работу."
+
+msgid "Preferences"
+msgstr "Настройки"
+
+msgid "Other"
+msgstr "Другое"
+
+msgid "Basic Settings"
+msgstr "Базовые настройки"
+
+msgid "Advanced Settings"
+msgstr "Дополнительные настройки"
+
+msgid "Use cookies.txt"
+msgstr "Использовать cookies.txt"
+
+msgid "Import cookies.txt"
+msgstr "Импортировать cookies.txt"
+
+msgid "Remove cookies.txt"
+msgstr "Удалить cookies.txt"
+
+msgid "remaining"
+msgstr "осталось"
+
+msgid "Start in Background Mode"
+msgstr "Запуск в фоновом режиме"
+
+msgid "Remote Timestamp"
+msgstr "Удаленная временная метка"
+
+msgid "Torrent"
+msgstr "Торрент"
+
+msgid "Checking for updates..."
+msgstr "Проверка обновлений..."
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr "Доступна новая версия Varia. Хотите обновиться?"
+
+msgid "Update available"
+msgstr "Доступно обновление"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Downloading update..."
+msgstr "Загрузка обновления..."
+
+msgid "Download failed."
+msgstr "Не удалось загрузить."
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "No"
+msgstr "Нет"
+
+msgid "Automatically Check for Updates"
+msgstr "Автоматическая проверка обновлений"
+
+msgid "Check Now"
+msgstr "Проверить сейчас"
+
+msgid "Do you want to check for updates on startup?"
+msgstr "Хотите ли вы проверять наличие обновлений при запуске?"
+
+msgid "File"
+msgstr "Файл"
+
+msgid "Video / Audio"
+msgstr "Видео / Аудио"
+
+msgid "Video and audio"
+msgstr "Видео и аудио"
+
+msgid "Video only"
+msgstr "Только видео"
+
+msgid "Audio only"
+msgstr "Только аудио"
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr "Частота кадров:"
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr "Битрейт:"
+
+msgid "Checking video..."
+msgstr "Проверка видео..."
+
+msgid "No video or audio streams found"
+msgstr "Видео- или аудиопотоки не найдены"
+
+msgid "Starting download..."
+msgstr "Начало загрузки..."
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+"Возможно, видеоплатформа не поддерживается или вы заблокированы платформой. "
+"Если у вас активное VPN-соединение, это может быть причиной, или вы можете "
+"попробовать импортировать файлы cookie вашего браузера через файл cookies."
+"txt."
+
+msgid "This will disable the video download functionality."
+msgstr "Это отключит функцию загрузки видео."
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr "Часть {indicator}"
+
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "Превышено ограничение одновременной загрузки, ожидание."
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr "{number}%"
+
+msgid "Allow Seeding"
+msgstr "Разрешить раздачу"
+
+msgid "Seeding Ratio Limit"
+msgstr "Ограничение коэффициента раздачи"
+
+msgid "Torrent Settings"
+msgstr "Настройки торрента"
+
+msgid "Custom Download Directory for Torrents"
+msgstr "Пользовательская папка загрузки для торрентов"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+"Поскольку торрент-система основана на том, что люди раздают данные, "
+"отключение раздачи очень не приветствуется и может привести к тому, что вы "
+"будете забанены некоторыми клиентами и трекерами. Обычно ожидается, что "
+"клиенты будут раздавать не меньше, чем скачивать (соотношение 1). Возможно, "
+"вы захотите ограничить коэффициент раздачи."
+
+msgid "Cancel Seeding"
+msgstr "Отменить раздачу"
+
+# Save button
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Show Menu"
+msgstr "Показать меню"
+
+msgid "OK"
+msgstr "Хорошо"
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+"Вы используете Varia в Snap-пакете. Чтобы иметь возможность использовать "
+"опцию \"Выключить устройство после завершения\", вы должны сначала дать "
+"Varia соответствующие разрешения. Для этого откройте окно терминала и "
+"выполните эту команду, а затем перезапустите Varia:"
+
+msgid "Enable Torrenting"
+msgstr "Включить режим торрента"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr ""
+"Расширение для браузера не будет работать, если включен удаленный режим."
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+"Отключение режима торрента предотвратит добавление новых торрентов. Это не "
+"остановит текущие торренты."
+
+msgid "Torrenting is disabled."
+msgstr "Режим торрента отключен."
+
+msgid "Unknown filesize"
+msgstr "Неизвестный размер файла"
+
+msgid "Show"
+msgstr "Показать"
+
+msgid "Quit"
+msgstr "Выйти"
+
+msgid "Background Mode on Close"
+msgstr "Фоновый режим при закрытии"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr "После закрытия Varia свернется в трей вместо закрытия."
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr "Значок в трее всегда виден"
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+"Значок в трее будет виден, даже если Varia не находится в фоновом режиме."
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr "Открыть при запуске"
+
+msgid "Varia will open automatically when the system starts."
+msgstr "Varia откроется автоматически при запуске системы."
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr "После открытия Varia запустится в фоновом режиме."
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+"Использовать Varia в качестве графического интерфейса для удаленного "
+"экземпляра aria2c."
+
+msgid "Configure"
+msgstr "Настроить"
+
+msgid "Download Segments"
+msgstr "Скачать сегменты"
+
+msgid "Pause"
+msgstr "Приостановить"
+
+msgid "Resume"
+msgstr "Возобновить"
+
+msgid "Stop"
+msgstr "Стоп"
+
+msgid "Open File"
+msgstr "Открыть файл"
+
+msgid "Retry"
+msgstr "Повторить"
+
+msgid "Require Encryption"
+msgstr "Требовать шифрования"
+
+msgid "Get Country Info of Peers"
+msgstr "Получить страны участников"
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+"Это позволит использовать внешнюю службу для получения геолокации IP-адресов "
+"ваших торрент-пиров, чтобы отобразить флаги стран в окне сведений."
+
+msgid "Download Details"
+msgstr "Подробности скачивания"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Status"
+msgstr "Состояние"
+
+msgid "File Name"
+msgstr "Название файла"
+
+msgid "Downloading"
+msgstr "Скачивание"
+
+msgid "Paused"
+msgstr "Приостановить"
+
+msgid "Percentage Downloaded"
+msgstr "Процентов скачано"
+
+msgid "Remaining"
+msgstr "Осталось"
+
+msgid "Download Speed"
+msgstr "Скорость скачивания"
+
+msgid "Seeding Speed"
+msgstr "Скорость раздачи"
+
+msgid "Amount Downloaded"
+msgstr "Количество скачанных"
+
+msgid "Amount Uploaded"
+msgstr "Количество закачанных"
+
+msgid "Ratio"
+msgstr "Соотношение"
+
+msgid "Torrent Peers"
+msgstr "Участники торрента"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общие"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показать комбинации клавиш"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выйти"

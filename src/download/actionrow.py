@@ -1,0 +1,160 @@
+import gi
+gi.require_version('Gtk', '4.0')
+gi.require_version('Adw', '1')
+from gi.repository import Gtk, Adw, Pango, GLib, Gio
+from stringstorage import gettext as _
+from download.thread import DownloadThread
+from download.details import show_download_details_dialog
+import json
+import os
+
+def on_download_clicked(button, self, entry, downloadname, download, mode, paused, dir):
+    if isinstance(entry, str):
+        url = entry
+    else:
+        url = entry.get_text()
+        entry.set_text("")
+
+    if url:
+        if downloadname:
+            download_item = create_actionrow(self, downloadname)
+
+        else:
+            download_item = create_actionrow(self, url)
+
+        download_thread = DownloadThread(self, url, download_item, downloadname, download, mode, paused, dir)
+        download_item.download_thread = download_thread
+        self.downloads.append(download_thread)
+        download_thread.start()
+
+        if paused == False:
+            self.all_paused = False
+    
+    return download_thread
+
+def create_actionrow(self, filename):
+    download_item = Adw.Bin()
+
+    download_item.add_css_class('card')
+
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    box_1 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+    box_1.set_margin_bottom(10)
+
+    box_2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+    box_2.set_margin_start(10)
+    box_2.set_margin_end(10)
+    box_2.set_margin_top(8)
+    box_2.set_margin_bottom(10)
+    download_item.set_child(box_2)
+
+    percentage_and_filename_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+
+    percentage_label = Gtk.Label(label=_("{number}%").replace("{number}", "0"))
+    percentage_label.set_halign(Gtk.Align.START)
+    percentage_label.add_css_class("dim-label")
+    percentage_label.set_margin_end(5)
+    percentage_and_filename_box.append(percentage_label)
+
+    filename_label = Gtk.Label(label=filename)
+    filename_label.set_ellipsize(Pango.EllipsizeMode.END)
+    filename_label.set_halign(Gtk.Align.START)
+    percentage_and_filename_box.append(filename_label)
+
+    box.append(percentage_and_filename_box)
+
+    progress_bar = Gtk.ProgressBar()
+
+    speed_label = Gtk.Label()
+    speed_label.set_ellipsize(Pango.EllipsizeMode.END)
+    speed_label.set_halign(Gtk.Align.START)
+    speed_label.add_css_class("dim-label")
+    box.append(speed_label)
+
+    button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
+    button_box.set_margin_start(10)
+
+    info_button = Gtk.Button.new_from_icon_name("info-outline-symbolic")
+    info_button.set_valign(Gtk.Align.CENTER)
+    info_button.add_css_class("circular")
+    info_button.connect("clicked", show_download_details_dialog, self, download_item)
+    info_button.set_tooltip_text(_("Download Details"))
+    button_box.append(info_button)
+
+    pause_button = Gtk.Button.new_from_icon_name("media-playback-pause-symbolic")
+    pause_button.set_valign(Gtk.Align.CENTER)
+    pause_button.add_css_class("circular")
+    pause_button.connect_handler_id = pause_button.connect("clicked", on_pause_clicked, self, pause_button, download_item, False, True)
+    pause_button.set_retry_mode = pause_button_set_retry_mode
+    pause_button.set_open_mode = pause_button_set_open_mode
+    pause_button.set_tooltip_text(_("Pause"))
+    button_box.append(pause_button)
+
+    stop_button = Gtk.Button.new_from_icon_name("media-playback-stop-symbolic")
+    stop_button.set_valign(Gtk.Align.CENTER)
+    stop_button.add_css_class("circular")
+    stop_button.add_css_class("destructive-action")
+    stop_button.connect("clicked", on_stop_clicked, self, download_item)
+    stop_button.set_tooltip_text(_("Stop"))
+    button_box.append(stop_button)
+
+    box_1.append(box)
+
+    box_1_expanding_box = Gtk.Box()
+    Gtk.Widget.set_hexpand(box_1_expanding_box, True)
+    box_1.append(box_1_expanding_box)
+
+    box_1.append(button_box)
+    box_2.append(box_1)
+    box_2.append(progress_bar)
+
+    self.download_list.prepend(download_item)
+
+    self.content_root_overlay.remove_overlay(self.status_page_widget)
+
+    download_item.percentage_label = percentage_label
+    download_item.progress_bar = progress_bar
+    download_item.speed_label = speed_label
+    download_item.pause_button = pause_button
+    download_item.stop_button = stop_button
+    download_item.filename_label = filename_label
+    download_item.info_button = info_button
+
+    return download_item
+
+def on_pause_clicked(button, self, pause_button, download_item, force_pause, run_pause_function):
+
+    if download_item.download_thread.return_is_paused() and force_pause == False:
+        download_item.download_thread.resume()
+
+    else:
+        if run_pause_function:
+            download_item.download_thread.pause(False)
+
+def on_stop_clicked(button, self, download_item):
+    download_item.download_thread.stop()
+
+def pause_button_set_retry_mode(button, self, download_item):
+    GLib.idle_add(button.set_icon_name, "view-refresh-symbolic")
+    button.disconnect(button.connect_handler_id)
+    button.connect_handler_id = button.connect("clicked", pause_button_on_retry_clicked, self, download_item)
+    button.set_tooltip_text(_("Retry"))
+
+def pause_button_set_open_mode(button, self, download_item):
+    GLib.idle_add(button.set_icon_name, "application-x-executable-symbolic")
+    button.disconnect(button.connect_handler_id)
+    button.connect_handler_id = button.connect("clicked", pause_button_on_open_clicked, self, download_item)
+    button.set_tooltip_text(_("Open File"))
+
+def pause_button_on_retry_clicked(button, self, download_item):
+    new_download_item = on_download_clicked(None, self, download_item.url, download_item.downloadname, None, download_item.mode, False, download_item.downloaddir)
+
+    self.download_list.reorder_child_after(new_download_item.actionrow, download_item.actionrow)
+    self.downloads.remove(new_download_item)
+    self.downloads.insert(self.downloads.index(download_item), new_download_item)
+
+    download_item.stop()
+
+def pause_button_on_open_clicked(button, self, download_item):
+    if os.path.exists(download_item.filepath):
+        Gio.AppInfo.launch_default_for_uri("file://" + download_item.filepath, None)

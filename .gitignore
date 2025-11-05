@@ -1,0 +1,8 @@
+.flatpak
+.vscode
+_build
+.flatpak-builder
+/src/__pycache__
+/src/download/__pycache__
+/src/window/__pycache__
+/src/tray/__pycache__

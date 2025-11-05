@@ -1,0 +1,60 @@
+#!@PYTHON@
+
+
+import os
+import sys
+import signal
+import locale
+import gettext
+import json
+
+VERSION = '@VERSION@'
+pkgdatadir = '@pkgdatadir@'
+localedir = '@localedir@'
+
+sys.path.insert(1, pkgdatadir)
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+gettext.install('varia', localedir)
+
+aria2cexec = sys.argv[1]
+ffmpegexec = sys.argv[2]
+snapvar = sys.argv[3]
+arguments = []
+
+if (len(sys.argv) > 4):
+	arguments = sys.argv
+	del arguments[:4]
+
+arguments = json.dumps(arguments)
+
+if snapvar != "NOSNAP":
+	snap_dir = snapvar
+	localedir = os.path.join(snap_dir, 'usr/share/locale')
+
+else:
+	snap_dir = None
+
+try:
+	locale.bindtextdomain('varia', localedir)
+	locale.textdomain('varia')
+except:
+	print('Cannot set locale.')
+try:
+	gettext.bindtextdomain('varia', localedir)
+	gettext.textdomain('varia')
+except:
+	print('Cannot load translations.')
+
+if __name__ == '__main__':
+	if snap_dir != None:
+		mymodule_dir = os.path.join(snap_dir, 'usr/share/varia/varia')
+		issnap = True
+
+	else:
+		mymodule_dir = os.path.join(pkgdatadir, 'varia')
+		issnap = False
+
+	sys.path.append( mymodule_dir )
+	os.listdir(mymodule_dir)
+	from variamain import main
+	sys.exit(main(VERSION, aria2cexec, ffmpegexec, issnap, arguments))

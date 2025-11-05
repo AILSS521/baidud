@@ -1,0 +1,654 @@
+# The Japanese translation of Varia.
+# Copyright (C) YEAR THE Varia'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Varia package.
+# Gnuey56 <gnuey56@proton.me>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-04-13 22:08+0000\n"
+"Last-Translator: Giant Pink Robots! <giantpinkrobots@protonmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/varia/varia/ja/"
+">\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;download;manager;ダウンロード;マネージャー;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "aria2 をベースにしたダウンロードマネージャー"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia は、aria2 をベースにしたダウンロードマネージャーであり、GTK4 と "
+"Libadwaita を使用することで、GNOME デスクトップとよく統合する使いやすいイン"
+"ターフェイスを提供します。"
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "有効な URL ではありません。"
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "すべてのダウンロード"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "進行中"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "完了済"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "Varia について"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "URL"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "ダウンロード"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "ダウンロードフォルダを開く"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "速度制限"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "すべてを一時停止"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "速度"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "速度制限を設定"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "すべてをキャンセル"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/s"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "制限なし"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "ダウンロードが完了しました。"
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "ダウンロード速度が制限されています。"
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "エラーが発生しました:"
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "KB/s"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 B/s"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr "MB/s"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr "KB/s"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr "B/s"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "同時ダウンロード数"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "すべてを再開"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr ""
+"GTK4 と Libadwaita を使用する、aria2 をベースのダウンロードマネージャー。"
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "このアプリケーションは以下のソフトウェアに依存しています:"
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr ""
+"これらすべてのアプリケーションのライセンスは、このアプリのディレクトリの "
+"dependencies_information ディレクトリにあります。"
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr "Gnuey56 <gnuey56@proton.me>"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "ダウンロードディレクトリ"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "変更"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "速度が制限されています"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "認証"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "ユーザー名"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "パスワード"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "認証に失敗しました。"
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "ディレクトリを開くのに失敗しました。"
+
+msgid "Remote Mode"
+msgstr "リモートモード"
+
+msgid "Remote aria2 IP"
+msgstr "リモート aria2 IP"
+
+msgid "Remote aria2 Port"
+msgstr "リモート aria2 ポート"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "リモート aria2 RPC シークレットトークン"
+
+msgid "Remote Download Location"
+msgstr "リモートのダウンロード場所"
+
+msgid "Exiting Varia..."
+msgstr "Varia を終了中..."
+
+msgid "Background Mode"
+msgstr "バックグラウンドモード"
+
+msgid "Continuing the downloads in the background."
+msgstr "バックグラウンドでダウンロードを続けます。"
+
+msgid "Browser Extension"
+msgstr "ブラウザ拡張機能"
+
+msgid "Shutdown on Completion"
+msgstr "完了時にシャットダウンする"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia はこのコンピューターをシャットダウンしようとしています。"
+
+msgid "Press Cancel to cancel and disable."
+msgstr "キャンセルを押して取り消しできます。"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Warning"
+msgstr "警告"
+
+msgid "Monday"
+msgstr "月曜日"
+
+msgid "Tuesday"
+msgstr "火曜日"
+
+msgid "Wednesday"
+msgstr "水曜日"
+
+msgid "Thursday"
+msgstr "木曜日"
+
+msgid "Friday"
+msgstr "金曜日"
+
+msgid "Saturday"
+msgstr "土曜日"
+
+msgid "Sunday"
+msgstr "日曜日"
+
+msgid "Start (h/m):"
+msgstr "開始 (時/分):"
+
+msgid "End (h/m):"
+msgstr "終了 (時/分):"
+
+msgid "Scheduler enabled"
+msgstr "スケジューラーが有効になっています"
+
+msgid "Scheduler"
+msgstr "スケジューラー"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Start downloading in these times"
+msgstr "これらの時間にダウンロードを開始する"
+
+msgid "Stop downloading in these times"
+msgstr "これらの時間にダウンロードを終了する"
+
+msgid "Add Timespan"
+msgstr "タイムスパンを追加"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "シード中"
+
+msgid "Failed"
+msgstr "失敗"
+
+msgid "Completion Options"
+msgstr "ダウンロード完了時のオプション"
+
+msgid "Exit on Completion"
+msgstr "完了時に終了する"
+
+msgid "Varia is about to quit."
+msgstr "Varia は終了しようとしています。"
+
+msgid "Preferences"
+msgstr "設定"
+
+msgid "Other"
+msgstr "その他"
+
+msgid "Basic Settings"
+msgstr "基本設定"
+
+msgid "Advanced Settings"
+msgstr "詳細設定"
+
+msgid "Use cookies.txt"
+msgstr "cookies.txt を使用"
+
+msgid "Import cookies.txt"
+msgstr "cookies.txt をインポート"
+
+msgid "Remove cookies.txt"
+msgstr "cookies.txt を削除"
+
+msgid "remaining"
+msgstr "残り"
+
+msgid "Start in Background Mode"
+msgstr "バックグラウンドモードで開始"
+
+msgid "Remote Timestamp"
+msgstr "リモートのタイムスタンプ"
+
+msgid "Torrent"
+msgstr ""
+
+# Updater
+msgid "Checking for updates..."
+msgstr ""
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Downloading update..."
+msgstr "ダウンロードが完了しました。"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download failed."
+msgstr "ダウンロードが完了しました。"
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "Automatically Check for Updates"
+msgstr ""
+
+msgid "Check Now"
+msgstr ""
+
+msgid "Do you want to check for updates on startup?"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Video / Audio"
+msgstr ""
+
+msgid "Video and audio"
+msgstr ""
+
+msgid "Video only"
+msgstr ""
+
+msgid "Audio only"
+msgstr ""
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr ""
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr ""
+
+msgid "Checking video..."
+msgstr ""
+
+msgid "No video or audio streams found"
+msgstr ""
+
+msgid "Starting download..."
+msgstr ""
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+
+msgid "This will disable the video download functionality."
+msgstr ""
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr ""
+
+#, fuzzy
+#| msgid "Simultaneous Download Amount"
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "同時ダウンロード数"
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr ""
+
+#, fuzzy
+#| msgid "Seeding"
+msgid "Allow Seeding"
+msgstr "シード中"
+
+#, fuzzy
+#| msgid "Speed Limit"
+msgid "Seeding Ratio Limit"
+msgstr "速度制限"
+
+#, fuzzy
+#| msgid "Advanced Settings"
+msgid "Torrent Settings"
+msgstr "詳細設定"
+
+#, fuzzy
+#| msgid "Download Directory"
+msgid "Custom Download Directory for Torrents"
+msgstr "ダウンロードディレクトリ"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+
+#, fuzzy
+#| msgid "Seeding"
+msgid "Cancel Seeding"
+msgstr "シード中"
+
+# Save button
+msgid "Save"
+msgstr ""
+
+msgid "Show Menu"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced Settings"
+msgid "Enable Torrenting"
+msgstr "詳細設定"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr ""
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+
+msgid "Torrenting is disabled."
+msgstr ""
+
+msgid "Unknown filesize"
+msgstr ""
+
+# Tray icon show button
+msgid "Show"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "shortcut window"
+#| msgid "Quit"
+msgid "Quit"
+msgstr "終了"
+
+#, fuzzy
+#| msgid "Background Mode"
+msgid "Background Mode on Close"
+msgstr "バックグラウンドモード"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr ""
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr ""
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr ""
+
+msgid "Varia will open automatically when the system starts."
+msgstr ""
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr ""
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Segments"
+msgstr "ダウンロードが完了しました。"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Pause"
+msgstr "すべてを一時停止"
+
+#, fuzzy
+#| msgid "Resume All"
+msgid "Resume"
+msgstr "すべてを再開"
+
+msgid "Stop"
+msgstr ""
+
+msgid "Open File"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Require Encryption"
+msgstr ""
+
+msgid "Get Country Info of Peers"
+msgstr ""
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Details"
+msgstr "ダウンロードが完了しました。"
+
+msgid "Type"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "File Name"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download"
+msgid "Downloading"
+msgstr "ダウンロード"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Paused"
+msgstr "すべてを一時停止"
+
+msgid "Percentage Downloaded"
+msgstr ""
+
+#, fuzzy
+#| msgid "remaining"
+msgid "Remaining"
+msgstr "残り"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Download Speed"
+msgstr "ダウンロードが完了しました。"
+
+#, fuzzy
+#| msgid "Seeding"
+msgid "Seeding Speed"
+msgstr "シード中"
+
+#, fuzzy
+#| msgid "Download complete."
+msgid "Amount Downloaded"
+msgstr "ダウンロードが完了しました。"
+
+msgid "Amount Uploaded"
+msgstr ""
+
+msgid "Ratio"
+msgstr ""
+
+#, fuzzy
+#| msgid "Advanced Settings"
+msgid "Torrent Peers"
+msgstr "詳細設定"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "一般"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "ショートカットを表示"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "終了"

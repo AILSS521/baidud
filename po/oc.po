@@ -1,0 +1,642 @@
+# Occitan translation file.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Quentin PAGÈS, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-09-22 10:08+0000\n"
+"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Language-Team: Occitan <https://hosted.weblate.org/projects/varia/varia/oc/"
+">\n"
+"Language: oc\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;telecargament;descargament;gestionari;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "Gestionari de telecargaments basat sus aria2"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia es un gestionari de telecargaments basat sus aria2 qu'utiliza GTK4 e "
+"Libadwaita per provesir una interfàcia de bon utilizar que s'intègra ben amb "
+"lo burèu GNOME."
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "Aquò es pas una URL valida."
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "Totes"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "En cors"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "Acabats"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "A prepaus de Varia"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "URL"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "Telecargar"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "Dobrir lo dossièr dels telecargaments"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "Velocitat limit"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "Tot metre en pausa"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "Velocitat"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "Definir la velocitat limit"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "Tot anullar"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/s"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "Cap de limit"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "Telecargament acabat."
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "La velocitat de telecargament es limitada."
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "Una error s'es producha :"
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "Mo/s"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "ko/s"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 o/s"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr " Mo/s"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr " ko/s"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr " o/s"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "Nombre de telecargaments simultanèus"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "Tot reprendre"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr ""
+"gestionari de telecargaments basat sus aria2 qu'utiliza GTK4 e Libadwaita."
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "Aquesta aplicacion utiliza los tròces de logicial :"
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr ""
+"Las licéncias de totes aquestes tròces se tròban dins lo dossièr de las "
+"informacions de las dependénciasound dins lo repertòri d'aquesta aplicacion."
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr "Quentin PAGÈS"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "Repertòri de telecargament"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "Modificar"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "Velocitat limitada"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "Autentificacion"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "Nom d’utilizaire"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "Senhal"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "Autorizacion refusada."
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "Fracàs a la dobertura del repertòri."
+
+msgid "Remote Mode"
+msgstr "Mòde distant"
+
+msgid "Remote aria2 IP"
+msgstr "IP aria2 alonhada"
+
+msgid "Remote aria2 Port"
+msgstr "Pòrt aria2 alonhat"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "Secrèt RPC aria2 alonhat"
+
+msgid "Remote Download Location"
+msgstr "Emplaçament de telecargament alonhat"
+
+msgid "Exiting Varia..."
+msgstr "Sortida de Varia..."
+
+msgid "Background Mode"
+msgstr "Mòde rèireplan"
+
+msgid "Continuing the downloads in the background."
+msgstr "Los telecargaments contunhan en rèireplan."
+
+msgid "Browser Extension"
+msgstr "Extension per navegador"
+
+msgid "Shutdown on Completion"
+msgstr "Atudar un còp acabat"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia es a mand d'atudar l'ordenador."
+
+msgid "Press Cancel to cancel and disable."
+msgstr "Quichatz Anullar per anullar e desactivar."
+
+msgid "Cancel"
+msgstr "Annular"
+
+msgid "Warning"
+msgstr "Avertiment"
+
+msgid "Monday"
+msgstr "Diluns"
+
+msgid "Tuesday"
+msgstr "Dimars"
+
+msgid "Wednesday"
+msgstr "Dimècres"
+
+msgid "Thursday"
+msgstr "Dijòus"
+
+msgid "Friday"
+msgstr "Divendres"
+
+msgid "Saturday"
+msgstr "Dissabte"
+
+msgid "Sunday"
+msgstr "Dimenge"
+
+msgid "Start (h/m):"
+msgstr "Debuta (h/m) :"
+
+msgid "End (h/m):"
+msgstr "Fin (h/m) :"
+
+msgid "Scheduler enabled"
+msgstr "Planificador activat"
+
+msgid "Scheduler"
+msgstr "Planificador"
+
+msgid "Enabled"
+msgstr "Activat"
+
+msgid "Start downloading in these times"
+msgstr ""
+
+msgid "Stop downloading in these times"
+msgstr ""
+
+msgid "Add Timespan"
+msgstr "Apondre un orari"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "Mandadís"
+
+msgid "Failed"
+msgstr "Fracàs"
+
+msgid "Completion Options"
+msgstr "Opcions de finalizacion"
+
+msgid "Exit on Completion"
+msgstr "Atudat en acabant"
+
+msgid "Varia is about to quit."
+msgstr ""
+
+msgid "Preferences"
+msgstr "Preferéncias"
+
+msgid "Other"
+msgstr "Autre"
+
+msgid "Basic Settings"
+msgstr "Paramètres basics"
+
+msgid "Advanced Settings"
+msgstr "Paramètres avançats"
+
+msgid "Use cookies.txt"
+msgstr "Utilizar cookies.txt"
+
+msgid "Import cookies.txt"
+msgstr "Importar cookies.txt"
+
+msgid "Remove cookies.txt"
+msgstr "Suprimir cookies.txt"
+
+msgid "remaining"
+msgstr "demorant"
+
+msgid "Start in Background Mode"
+msgstr "Aviat en mòde rèireplan"
+
+msgid "Remote Timestamp"
+msgstr "Orari distant"
+
+msgid "Torrent"
+msgstr "Torrent"
+
+# Updater
+msgid "Checking for updates..."
+msgstr ""
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "Downloading update..."
+msgstr "Telecargament de l'actualizacion..."
+
+msgid "Download failed."
+msgstr "Fracàs del telecargament."
+
+msgid "Yes"
+msgstr "Òc"
+
+msgid "No"
+msgstr "Non"
+
+msgid "Automatically Check for Updates"
+msgstr ""
+
+msgid "Check Now"
+msgstr "Verificar ara"
+
+msgid "Do you want to check for updates on startup?"
+msgstr ""
+
+msgid "File"
+msgstr "Fichièr"
+
+msgid "Video / Audio"
+msgstr "Vidèo/ Àudio"
+
+msgid "Video and audio"
+msgstr "Vidèo e àudio"
+
+msgid "Video only"
+msgstr "Vidèo solament"
+
+msgid "Audio only"
+msgstr "Àudio solament"
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr ""
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr ""
+
+msgid "Checking video..."
+msgstr ""
+
+msgid "No video or audio streams found"
+msgstr ""
+
+msgid "Starting download..."
+msgstr "Lançament del telecargament"
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+
+msgid "This will disable the video download functionality."
+msgstr ""
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr ""
+
+#, fuzzy
+#| msgid "Simultaneous Download Amount"
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "Nombre de telecargaments simultanèus"
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr ""
+
+msgid "Allow Seeding"
+msgstr ""
+
+#, fuzzy
+#| msgid "Speed Limit"
+msgid "Seeding Ratio Limit"
+msgstr "Velocitat limit"
+
+msgid "Torrent Settings"
+msgstr "Paramètres de Torrent"
+
+#, fuzzy
+#| msgid "Download Directory"
+msgid "Custom Download Directory for Torrents"
+msgstr "Repertòri de telecargament"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+
+msgid "Cancel Seeding"
+msgstr ""
+
+# Save button
+msgid "Save"
+msgstr "Enregistrar"
+
+msgid "Show Menu"
+msgstr "Mostrar lo menú"
+
+msgid "OK"
+msgstr ""
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent Settings"
+msgid "Enable Torrenting"
+msgstr "Paramètres de Torrent"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr ""
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+
+msgid "Torrenting is disabled."
+msgstr ""
+
+msgid "Unknown filesize"
+msgstr "Talha de fichièr desconeguda"
+
+#, fuzzy
+#| msgid "Show Menu"
+msgid "Show"
+msgstr "Mostrar lo menú"
+
+msgid "Quit"
+msgstr "Quitar"
+
+#, fuzzy
+#| msgid "Background Mode"
+msgid "Background Mode on Close"
+msgstr "Mòde rèireplan"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr ""
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr ""
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr ""
+
+msgid "Varia will open automatically when the system starts."
+msgstr ""
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr ""
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+
+msgid "Configure"
+msgstr ""
+
+msgid "Download Segments"
+msgstr "Telecargar segments"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Pause"
+msgstr "Tot metre en pausa"
+
+#, fuzzy
+#| msgid "Resume All"
+msgid "Resume"
+msgstr "Tot reprendre"
+
+msgid "Stop"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "Open File"
+msgstr "Fichièr"
+
+msgid "Retry"
+msgstr ""
+
+msgid "Require Encryption"
+msgstr ""
+
+msgid "Get Country Info of Peers"
+msgstr ""
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+
+#, fuzzy
+#| msgid "Download failed."
+msgid "Download Details"
+msgstr "Fracàs del telecargament."
+
+msgid "Type"
+msgstr "Tipe"
+
+msgid "Status"
+msgstr ""
+
+#, fuzzy
+#| msgid "File"
+msgid "File Name"
+msgstr "Fichièr"
+
+#, fuzzy
+#| msgid "Download"
+msgid "Downloading"
+msgstr "Telecargar"
+
+#, fuzzy
+#| msgid "Pause All"
+msgid "Paused"
+msgstr "Tot metre en pausa"
+
+msgid "Percentage Downloaded"
+msgstr ""
+
+#, fuzzy
+#| msgid "remaining"
+msgid "Remaining"
+msgstr "demorant"
+
+#, fuzzy
+#| msgid "Download Segments"
+msgid "Download Speed"
+msgstr "Telecargar segments"
+
+msgid "Seeding Speed"
+msgstr ""
+
+#, fuzzy
+#| msgid "Download Segments"
+msgid "Amount Downloaded"
+msgstr "Telecargar segments"
+
+msgid "Amount Uploaded"
+msgstr ""
+
+msgid "Ratio"
+msgstr ""
+
+#, fuzzy
+#| msgid "Torrent"
+msgid "Torrent Peers"
+msgstr "Torrent"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "General"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Afichar los acorchis"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Quitar"

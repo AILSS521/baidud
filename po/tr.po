@@ -1,0 +1,635 @@
+# Turkish translations for varia package.
+# Copyright (C) 2023 varia'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the varia package.
+#
+# Sabri Ünal <libreajans@gmail.com>, 2023.
+# Giant Pink Robots! <giantpinkrobots@protonmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-30 03:17+0300\n"
+"PO-Revision-Date: 2025-09-24 12:02+0000\n"
+"Last-Translator: Giant Pink Robots! <giantpinkrobots@protonmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/varia/varia/tr/>"
+"\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.14-dev\n"
+
+#. Translators: Do NOT translate or localize the application name.
+#: data/io.github.giantpinkrobots.varia.desktop.in:4
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:3
+msgid "Varia"
+msgstr "Varia"
+
+#. Translators: These are search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.giantpinkrobots.varia.desktop.in:11
+msgid "varia;aria;download;manager;"
+msgstr "varia;aria;download;manager;indirme;yöneticisi;"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:4
+msgid "Download manager based on aria2"
+msgstr "Aria2 tabanlı indirme yöneticisi"
+
+#: data/io.github.giantpinkrobots.varia.metainfo.xml.in:16
+msgid ""
+"Varia is a download manager based on aria2 that utilizes GTK4 and Libadwaita "
+"to provide a easy to use interface that integrates well with the GNOME "
+"desktop."
+msgstr ""
+"Varia, GNOME masaüstü ile iyi tümleşen kullanımı kolay arayüz sağlamak için "
+"GTK4 ve Libadwaita kullanan aria2 tabanlı bir indirme yöneticisidir."
+
+#: src/variamain.py:45
+msgid "This is not a valid URL."
+msgstr "URL geçersiz."
+
+#: src/variamain.py:125
+msgid "All"
+msgstr "Hepsi"
+
+#: src/variamain.py:137
+msgid "In Progress"
+msgstr "Devam Edenler"
+
+#: src/variamain.py:148
+msgid "Completed"
+msgstr "Tamamlananlar"
+
+#: src/variamain.py:171
+msgid "About Varia"
+msgstr "Varia Hakkında"
+
+#: src/variamain.py:177
+msgid "URL"
+msgstr "URL"
+
+#: src/variamain.py:178
+msgid "Download"
+msgstr "İndir"
+
+#: src/variamain.py:184
+msgid "Open Download Folder"
+msgstr "İndirme Klasörünü Aç"
+
+#: src/variamain.py:196
+msgid "Speed Limit"
+msgstr "Hız Sınırı"
+
+#: src/variamain.py:203 src/variamain.py:423
+msgid "Pause All"
+msgstr "Tümünü Duraklat"
+
+#: src/variamain.py:212
+msgid "Speed"
+msgstr "Hız"
+
+#: src/variamain.py:215
+msgid "Set Speed Limit"
+msgstr "Hız Sınırı Koy"
+
+#: src/variamain.py:216
+msgid "Cancel All"
+msgstr "Tümünü İptal Et"
+
+#: src/variamain.py:235
+msgid "/s"
+msgstr "/s"
+
+#: src/variamain.py:238
+msgid "No limit"
+msgstr "Limit yok"
+
+#: src/variamain.py:274
+msgid "Download complete."
+msgstr "İndirme tamamlandı."
+
+#: src/variamain.py:276
+msgid "Download speed is limited."
+msgstr "İndirme hızı sınırlandı."
+
+#: src/variamain.py:277
+msgid "An error occurred:"
+msgstr "Hata oluştu:"
+
+#: src/variamain.py:292
+msgid "MB/s"
+msgstr "MB/s"
+
+#: src/variamain.py:294
+msgid "KB/s"
+msgstr "KB/s"
+
+#: src/variamain.py:298
+msgid "0 B/s"
+msgstr "0 B/s"
+
+#: src/variamain.py:300
+msgid " MB/s"
+msgstr " MB/s"
+
+#: src/variamain.py:302
+msgid " KB/s"
+msgstr " KB/s"
+
+#: src/variamain.py:304
+msgid " B/s"
+msgstr " B/s"
+
+#: src/variamain.py:404
+msgid "Simultaneous Download Amount"
+msgstr "Aynı Anda İndirme Sayısı"
+
+#: src/variamain.py:410
+msgid "Resume All"
+msgstr "Tümünü Sürdür"
+
+#: src/variamain.py:443
+msgid "aria2 based download manager utilizing GTK4 and Libadwaita."
+msgstr "GTK4 ve Libadwaita kullanan aria2 tabanlı indirme yöneticisi."
+
+#: src/variamain.py:777
+msgid "This application relies on the following pieces of software:"
+msgstr "Bu uygulama aşağıdaki yazılımlara dayanır:"
+
+#: src/variamain.py:777
+msgid ""
+"The licenses of all of these pieces of software can be found in the "
+"dependencies_information directory in this application's app directory."
+msgstr ""
+"Tüm bu yazılımlara ait lisanslar, uygulama dizinindeki "
+"dependencies_information dizininde bulunabilir."
+
+#: src/variamain.py:449
+msgid "translator-credits"
+msgstr ""
+"Sabri Ünal <libreajans@gmail.com>\n"
+"Giant Pink Robots! <giantpinkrobots@protonmail.com>"
+
+#: src/variamain.py:457
+msgid "Download Directory"
+msgstr "İndirme Klasörü"
+
+#: src/variamain.py:460
+msgid "Change"
+msgstr "Değiştir"
+
+#: src/variamain.py:463
+msgid "Speed limited"
+msgstr "Hız sınırlı"
+
+#: src/variamain.py:519
+msgid "Authentication"
+msgstr "Kimlik Doğrulama"
+
+#: src/variamain.py:532
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: src/variamain.py:534
+msgid "Password"
+msgstr "Şifre"
+
+#: src/variamain.py:554
+msgid "Authorization failed."
+msgstr "Yetkilendirme başarısız oldu."
+
+#: src/variamain.py:806
+msgid "Failed to open directory."
+msgstr "Dizin açılamadı."
+
+msgid "Remote Mode"
+msgstr "Uzaktan Kontrol Modu"
+
+msgid "Remote aria2 IP"
+msgstr "Uzak aria2 IP'si"
+
+msgid "Remote aria2 Port"
+msgstr "Uzak aria2 Port'u"
+
+msgid "Remote aria2 RPC Secret"
+msgstr "Uzak aria2 RPC Şifresi"
+
+msgid "Remote Download Location"
+msgstr "Uzak İndirme Dizini"
+
+msgid "Exiting Varia..."
+msgstr "Varia'dan çıkılıyor..."
+
+msgid "Background Mode"
+msgstr "Arka Plan Modu"
+
+msgid "Continuing the downloads in the background."
+msgstr "İndirmeler arka planda devam ediyor."
+
+msgid "Browser Extension"
+msgstr "Tarayıcı Uzantısı"
+
+msgid "Shutdown on Completion"
+msgstr "İndirmeler Bittiğinde Bilgisayarı Kapat"
+
+msgid "Varia is about to shut down your computer."
+msgstr "Varia birazdan bilgisayarınızı kapatacak."
+
+msgid "Press Cancel to cancel and disable."
+msgstr "İptal edip devre dışı bırakmak için Vazgeç'e basın."
+
+msgid "Cancel"
+msgstr "Vazgeç"
+
+msgid "Warning"
+msgstr "Uyarı"
+
+msgid "Monday"
+msgstr "Pazartesi"
+
+msgid "Tuesday"
+msgstr "Salı"
+
+msgid "Wednesday"
+msgstr "Çarşamba"
+
+msgid "Thursday"
+msgstr "Perşembe"
+
+msgid "Friday"
+msgstr "Cuma"
+
+msgid "Saturday"
+msgstr "Cumartesi"
+
+msgid "Sunday"
+msgstr "Pazar"
+
+msgid "Start (h/m):"
+msgstr "Başlangıç (s/d):"
+
+msgid "End (h/m):"
+msgstr "Bitiş (s/d):"
+
+msgid "Scheduler enabled"
+msgstr "Zamanlayıcı aktif"
+
+msgid "Scheduler"
+msgstr "Zamanlayıcı"
+
+msgid "Enabled"
+msgstr "Aktif"
+
+msgid "Start downloading in these times"
+msgstr "Bu zamanlarda indir"
+
+msgid "Stop downloading in these times"
+msgstr "Bu zamanlarda indirme"
+
+msgid "Add Timespan"
+msgstr "Zaman Aralığı Ekle"
+
+#: When a download is currently seeding:
+msgid "Seeding"
+msgstr "Seed Ediliyor"
+
+msgid "Failed"
+msgstr "Başarısız"
+
+msgid "Completion Options"
+msgstr "Tamamlama Ayarları"
+
+msgid "Exit on Completion"
+msgstr "İndirmeler Bittiğinde Çık"
+
+msgid "Varia is about to quit."
+msgstr "Varia birazdan kendini kapatacak."
+
+msgid "Preferences"
+msgstr "Ayarlar"
+
+msgid "Other"
+msgstr "Diğer"
+
+msgid "Basic Settings"
+msgstr "Basit Ayarlar"
+
+msgid "Advanced Settings"
+msgstr "Gelişmiş Ayarlar"
+
+msgid "Use cookies.txt"
+msgstr "cookies.txt Kullan"
+
+msgid "Import cookies.txt"
+msgstr "cookies.txt İçe Aktar"
+
+msgid "Remove cookies.txt"
+msgstr "cookies.txt'i Sil"
+
+msgid "remaining"
+msgstr "kaldı"
+
+msgid "Start in Background Mode"
+msgstr "Arkaplan Modunda Başlat"
+
+msgid "Remote Timestamp"
+msgstr "Uzak Zaman Damgası"
+
+msgid "Torrent"
+msgstr "Torrent"
+
+msgid "Checking for updates..."
+msgstr "Güncellemeler denetleniyor..."
+
+msgid "A new version of Varia is available. Do you want to update?"
+msgstr "Varia'nın yeni bir sürümü mevcut. Güncellemek ister misiniz?"
+
+msgid "Update available"
+msgstr "Güncelleme mevcut"
+
+msgid "Update"
+msgstr "Güncelle"
+
+msgid "Downloading update..."
+msgstr "Güncelleme indiriliyor..."
+
+msgid "Download failed."
+msgstr "İndirme başarısız."
+
+msgid "Yes"
+msgstr "Evet"
+
+msgid "No"
+msgstr "Hayır"
+
+msgid "Automatically Check for Updates"
+msgstr "Güncellemeleri Otomatik Olarak Kontrol Et"
+
+msgid "Check Now"
+msgstr "Şimdi Kontrol Et"
+
+msgid "Do you want to check for updates on startup?"
+msgstr "Uygulama başlangıcında güncelleme kontrolü yapılmasını ister misiniz?"
+
+msgid "File"
+msgstr "Dosya"
+
+msgid "Video / Audio"
+msgstr "Video / Ses"
+
+msgid "Video and audio"
+msgstr "Video ve ses"
+
+msgid "Video only"
+msgstr "Yalnızca video"
+
+msgid "Audio only"
+msgstr "Yalnızca ses"
+
+#: Relating to video download:
+msgid "Framerate:"
+msgstr "Kare hızı:"
+
+#: Relating to video download:
+msgid "Bitrate:"
+msgstr "Bit hızı:"
+
+msgid "Checking video..."
+msgstr "Video kontrol ediliyor..."
+
+msgid "No video or audio streams found"
+msgstr "Video veya ses kaynağı bulunamadı"
+
+msgid "Starting download..."
+msgstr "İndirme başlatılıyor..."
+
+msgid ""
+"The video platform may not be supported or you may be being blocked by the "
+"platform. If you have an active VPN connection that might be the cause, or "
+"you can try importing your browser's cookies through a cookies.txt file."
+msgstr ""
+"Video platformu desteklenmiyor olabilir veya platform tarafından "
+"engelleniyor olabilirsiniz.. Aktif bir VPN bağlantınız varsa ondan dolayı "
+"olabilir, veya tarayıcı çerezlerini cookies.txt dosyası olarak içe aktarmayı "
+"deneyebilirsiniz."
+
+msgid "This will disable the video download functionality."
+msgstr "Bu seçenek video indirme fonksiyonu devre dışı bırakır."
+
+#: Relating to video download progress where it says "Part 1/2" - {indicator}
+#: is replaced by "1/2" or "2/2" (don't translate {indicator})
+msgid "Part {indicator}"
+msgstr "Kısım {indicator}"
+
+msgid "Simultaneous download limit exceeded, waiting."
+msgstr "Aynı anda indirme limiti aşıldı, bekliyor."
+
+#: The way percentages will be shown, like 10% or %10 depending on the language
+#: (don't translate {number}, just move it if needed)
+msgid "{number}%"
+msgstr "%{number}"
+
+msgid "Allow Seeding"
+msgstr "Seed Etmeye İzin Ver"
+
+msgid "Seeding Ratio Limit"
+msgstr "Seed Oranı Limiti"
+
+msgid "Torrent Settings"
+msgstr "Torrent Ayarları"
+
+msgid "Custom Download Directory for Torrents"
+msgstr "Torrentlere Özel İndirme Klasörü"
+
+#: When the user attempts to disable seeding
+msgid ""
+"As torrenting relies on people seeding data, disabling seeding is very much "
+"frowned upon and may result in you getting throttled or banned by certain "
+"clients and trackers. Clients are usually expected to seed at least as much "
+"as they download (a ratio of 1). You may want to consider limiting your "
+"seeding ratio instead."
+msgstr ""
+"Torrent sistemi verileri seed eden kişiler sayesinde çalıştığından dolayı "
+"seeding işlemini devre dışı bırakmak hoş karşılanmaz ve bazı istemciler ve "
+"tracker'lar tarafından hızınızın düşürülmesine veya engellenmenize neden "
+"olabilir. İstemcilerden genellikle indirdikleri kadar yükleme yapmaları (1:1 "
+"oran) beklenir. Bunun yerine seed oranınızı sınırlamayı düşünebilirsiniz."
+
+msgid "Cancel Seeding"
+msgstr "Seed Etmeyi Devre Dışı Bırak"
+
+# Save button
+msgid "Save"
+msgstr "Kaydet"
+
+msgid "Show Menu"
+msgstr "Menüyü Göster"
+
+msgid "OK"
+msgstr "Tamam"
+
+# Snap version permission warning
+msgid ""
+"You are using Varia as a Snap package. To be able to use the shutdown on "
+"completion option you must first give Varia the related permission. To do "
+"this, open a terminal window and execute this command and then restart Varia:"
+msgstr ""
+"Varia'nın Snap versiyonunu kullanıyorsunuz. İndirme bitiminde bilgisayarı "
+"kapatma opsiyonunu kullanmak istiyorsanız önce Varia'ya gerekli izini "
+"vermeniz gerekiyor. Bunu yapmak için bir terminal açıp bu komutu "
+"çalıştırdıktan sonra Varia'yı yeniden başlatın:"
+
+msgid "Enable Torrenting"
+msgstr "Torrent Desteğini Etkinleştir"
+
+msgid "The browser extension will not work when Remote Mode is enabled."
+msgstr "Uzaktan Kontrol Modu açıkken tarayıcı uzantısı çalışmaz."
+
+msgid ""
+"Disabling torrenting will prevent new torrents from being added. It will not "
+"stop current torrent instances."
+msgstr ""
+"Torrentleri devre dışı bırakmak yeni torrent eklenmesini engeller. İndirme "
+"sürecinde olan torrentleri durdurmaz."
+
+msgid "Torrenting is disabled."
+msgstr "Torrent desteği devre dışı."
+
+msgid "Unknown filesize"
+msgstr "Dosya boyutu belirsiz"
+
+# Tray icon show button
+msgid "Show"
+msgstr "Göster"
+
+# Tray icon quit button
+msgid "Quit"
+msgstr "Çık"
+
+msgid "Background Mode on Close"
+msgstr "Kapayınca Arka Plan Moduna Al"
+
+msgid "Upon closing, Varia will close to tray insted of exiting."
+msgstr "Varia kapanmak yerine sistem tepsisine küçültülür."
+
+# Tray icon always visible option
+msgid "Tray Icon Always Visible"
+msgstr "Tepsi Simgesi Her Zaman Görünür"
+
+msgid ""
+"The tray icon will be visible even when Varia is not in background mode."
+msgstr ""
+"Varia arka plan modunda değilse bile sistem tepsisi simgesi her zaman "
+"gösterilir."
+
+# Open on startup option
+msgid "Open on Startup"
+msgstr "Sistemle Birlikte Başlat"
+
+msgid "Varia will open automatically when the system starts."
+msgstr "Varia sistem başlangıcında otomatik olarak başlatılır."
+
+# Start on background mode subtitle
+msgid "Varia will start directly in background mode upon opening."
+msgstr "Varia direkt olarak arka plan modunda başlatılır."
+
+# Remote mode additional explanation
+msgid "Use Varia as a GUI for a remote aria2c instance."
+msgstr ""
+"Varia'yı başka bir aria2c süreci için bir grafiksel arayüz olarak kullan."
+
+msgid "Configure"
+msgstr "Yapılandır"
+
+msgid "Download Segments"
+msgstr "İndirme Parçaları"
+
+msgid "Pause"
+msgstr "Duraklat"
+
+msgid "Resume"
+msgstr "Sürdür"
+
+msgid "Stop"
+msgstr "Durdur"
+
+msgid "Open File"
+msgstr "Dosyayı Aç"
+
+msgid "Retry"
+msgstr "Yeniden Dene"
+
+msgid "Require Encryption"
+msgstr "Şifreleme Gerektir"
+
+msgid "Get Country Info of Peers"
+msgstr "Eşlerin Ülke Bilgilerini Göster"
+
+msgid ""
+"This will use an external service to get the IP geolocation of your torrent "
+"peers in order to show country flags in the details window."
+msgstr ""
+"Bu seçenek indirme detayları penceresinde torrent eşlerinin ülke "
+"bayraklarını göstermek için harici bir servis kullanarak IP adreslerinin "
+"coğrafi konumunu alır."
+
+msgid "Download Details"
+msgstr "İndirme Detayları"
+
+msgid "Type"
+msgstr "Tür"
+
+msgid "Status"
+msgstr "Durum"
+
+msgid "File Name"
+msgstr "Dosya Adı"
+
+msgid "Downloading"
+msgstr "İndiriliyor"
+
+msgid "Paused"
+msgstr "Duraklatıldı"
+
+msgid "Percentage Downloaded"
+msgstr "İndirilen Yüzde"
+
+msgid "Remaining"
+msgstr "Kalan"
+
+msgid "Download Speed"
+msgstr "İndirme Hızı"
+
+msgid "Seeding Speed"
+msgstr "Seed Hızı"
+
+msgid "Amount Downloaded"
+msgstr "İndirilen Miktar"
+
+msgid "Amount Uploaded"
+msgstr "Gönderilen Miktar"
+
+msgid "Ratio"
+msgstr "Oran"
+
+msgid "Torrent Peers"
+msgstr "Torrent Eşleri"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Genel"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Kısayolları Göster"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Çık"
+
+#~ msgid "Torrenting Disabled"
+#~ msgstr "Torrent Devre Dışı"
