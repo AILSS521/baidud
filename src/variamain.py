@@ -497,8 +497,30 @@ class MainWindow(application_window):
             counter += 1
             GLib.timeout_add(250, self.aria2c_exiting_check, app, counter, variaapp, exiting_dialog)
         else:
-            self.aria2c_subprocess.terminate()
-            self.aria2c_subprocess.wait()
+            # Forcefully terminate aria2c if it hasn't exited gracefully
+            try:
+                if self.aria2c_subprocess.poll() is None:  # Process is still running
+                    print("aria2c process did not exit gracefully, forcing termination...")
+                    if os.name == 'nt':
+                        # Windows: use kill() to force process termination
+                        self.aria2c_subprocess.kill()
+                    else:
+                        # Linux: use os.killpg() to kill entire process group
+                        try:
+                            os.killpg(os.getpgid(self.aria2c_subprocess.pid), signal.SIGKILL)
+                        except (ProcessLookupError, AttributeError, OSError):
+                            # Fallback to kill() if process group operation fails
+                            self.aria2c_subprocess.kill()
+
+                    # Wait for process to terminate (max 2 seconds)
+                    try:
+                        self.aria2c_subprocess.wait(timeout=2)
+                        print("aria2c process terminated successfully")
+                    except subprocess.TimeoutExpired:
+                        print("WARNING: aria2c process did not terminate after kill signal")
+            except (ProcessLookupError, AttributeError, OSError) as e:
+                print(f"Error terminating aria2c: {e}")
+
             if (exiting_dialog is not None):
                 exiting_dialog.force_close()
             self.save_window_size()
@@ -728,20 +750,64 @@ def global_exception_handler(exctype, value, tb):
 
 def stop_subprocesses_and_exit(*args):
     print("*** Varia has stopped ***")
-    
+
     if "tray_process_global" in locals() and tray_process_global.poll() is None:
         tray_process_global.kill()
         myapp.win.tray_connection_thread_stop = True
-    
+
+    # Improved aria2c subprocess termination with timeout and forced kill
     if "aria2c_subprocess" in locals() and aria2c_subprocess.poll() is None:
-        myapp.win.api.client.shutdown()
-        aria2c_subprocess.wait()
-    
+        try:
+            # First, attempt graceful shutdown via RPC
+            print("Attempting graceful shutdown of aria2c...")
+            try:
+                myapp.win.api.client.shutdown()
+            except Exception as e:
+                print(f"RPC shutdown failed: {e}")
+
+            # Wait for process to exit gracefully (max 3 seconds)
+            try:
+                aria2c_subprocess.wait(timeout=3)
+                print("aria2c shutdown gracefully")
+            except subprocess.TimeoutExpired:
+                print("aria2c did not shutdown gracefully, forcing kill...")
+
+                # Force kill the process
+                try:
+                    if os.name == 'nt':
+                        # Windows: use kill() to force process termination
+                        aria2c_subprocess.kill()
+                    else:
+                        # Linux: use os.killpg() to kill entire process group
+                        try:
+                            os.killpg(os.getpgid(aria2c_subprocess.pid), signal.SIGKILL)
+                        except (ProcessLookupError, AttributeError, OSError):
+                            # Fallback to kill() if process group operation fails
+                            aria2c_subprocess.kill()
+
+                    # Wait again for process to terminate (max 1 second)
+                    try:
+                        aria2c_subprocess.wait(timeout=1)
+                        print("aria2c process force-killed successfully")
+                    except subprocess.TimeoutExpired:
+                        print("WARNING: aria2c process still running after force kill attempt")
+                except (ProcessLookupError, AttributeError, OSError) as e:
+                    print(f"Error force-killing aria2c: {e}")
+        except Exception as e:
+            print(f"Unexpected error during aria2c shutdown: {e}")
+            # Attempt emergency kill as last resort
+            try:
+                if aria2c_subprocess.poll() is None:
+                    print("Attempting emergency kill of aria2c...")
+                    aria2c_subprocess.kill()
+            except:
+                pass
+
     try:
         myapp.win.destroy()
         myapp.quit()
         sys.exit()
-    
+
     except:
         return
 
