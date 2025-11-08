@@ -133,7 +133,25 @@ class MainWindow(application_window):
         if (aria2_connection_successful == -1):
             return
 
-        # Create window contents in main_container:
+        # initiate() 已经设置了窗口内容，需要将其移到 main_container
+        # 保存当前窗口内容（由 initiate 创建的 root_window_overlay）
+        if os.name == 'nt':
+            main_content = self.get_child()
+            self.set_child(None)  # 移除窗口内容
+        else:
+            main_content = self.get_content()
+            self.set_content(None)  # 移除窗口内容
+
+        # 将主内容添加到 main_container
+        self.main_container.append(main_content)
+
+        # 恢复 view_stack 作为窗口内容
+        if os.name == 'nt':
+            self.set_child(self.view_stack)
+        else:
+            self.set_content(self.view_stack)
+
+        # Create window contents:
         window_create_sidebar_baidu(self, self.variaapp, variaVersion)
         window_create_content(self)
 
