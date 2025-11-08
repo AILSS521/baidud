@@ -21,6 +21,9 @@ from download.actionrow import on_download_clicked
 from download.listen import deal_with_simultaneous_download_limit
 from download.actionrow import create_actionrow
 from download.thread import DownloadThread
+from auth.manager import AuthManager
+from api.client import BaiduAPIClient
+from baidu.login import LoginWindow
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, GLib, Gio, Gdk
@@ -40,7 +43,11 @@ class MainWindow(application_window):
     def __init__(self, variaapp, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        from window.sidebar import window_create_sidebar
+        # 初始化百度网盘认证系统
+        self.auth = AuthManager()
+        self.api_client = BaiduAPIClient(self.auth)
+
+        from window.sidebar_baidu import window_create_sidebar_baidu
         from window.content import window_create_content
         from window.updater import windows_updater
         from download.communicate import set_speed_limit, set_aria2c_download_directory, set_aria2c_custom_global_option
@@ -68,7 +75,7 @@ class MainWindow(application_window):
             return
 
         # Create window contents:
-        window_create_sidebar(self, variaapp, variaVersion)
+        window_create_sidebar_baidu(self, variaapp, variaVersion)
         window_create_content(self)
 
         if self.appconf["schedule_enabled"] == 1:
@@ -167,6 +174,10 @@ class MainWindow(application_window):
 
         self.tray_notification = False
 
+        # 检查百度网盘登录状态
+        if not self.auth.is_authenticated():
+            GLib.idle_add(self.show_login_window)
+
         self.present()
 
         # Start in background mode if it was enabled in preferences:
@@ -234,6 +245,52 @@ class MainWindow(application_window):
             tray_process_global = self.tray_process
 
             self.tray_process_connection_thread = threading.Thread(target=tray_process_connection, daemon=True).start()
+
+    def show_login_window(self):
+        """显示百度网盘登录窗口"""
+        def on_login_success():
+            # 登录成功后可以刷新侧边栏用户信息
+            # 这里可以添加UI更新逻辑
+            pass
+
+        login_window = LoginWindow(self, self.auth, on_login_success)
+        login_window.present()
+
+    def add_baidu_download_task(self, file_info):
+        """
+        添加百度网盘下载任务
+
+        Args:
+            file_info: 文件信息字典，包含：
+                - url: 下载链接
+                - filename: 文件名
+                - ua: User-Agent
+        """
+        url = file_info.get('url')
+        filename = file_info.get('filename')
+        user_agent = file_info.get('ua')
+
+        if url and url != '失败请重试':
+            # 构建自定义 headers
+            headers = None
+            if user_agent:
+                headers = {
+                    'User-Agent': user_agent,
+                    'Referer': 'https://pan.baidu.com'
+                }
+
+            # 调用现有的下载添加逻辑
+            on_download_clicked(
+                None,  # button
+                self,  # main_window
+                url,   # entry/url
+                filename,  # downloadname
+                None,  # download
+                "regular",  # mode
+                False,  # paused
+                self.appconf["download_directory"],  # dir
+                headers  # headers（新增参数）
+            )
 
     def filter_download_list(self, button, filter_mode):
         if (button != "no"):

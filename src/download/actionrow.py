@@ -8,7 +8,7 @@ from download.details import show_download_details_dialog
 import json
 import os
 
-def on_download_clicked(button, self, entry, downloadname, download, mode, paused, dir):
+def on_download_clicked(button, self, entry, downloadname, download, mode, paused, dir, headers=None):
     if isinstance(entry, str):
         url = entry
     else:
@@ -22,14 +22,14 @@ def on_download_clicked(button, self, entry, downloadname, download, mode, pause
         else:
             download_item = create_actionrow(self, url)
 
-        download_thread = DownloadThread(self, url, download_item, downloadname, download, mode, paused, dir)
+        download_thread = DownloadThread(self, url, download_item, downloadname, download, mode, paused, dir, headers)
         download_item.download_thread = download_thread
         self.downloads.append(download_thread)
         download_thread.start()
 
         if paused == False:
             self.all_paused = False
-    
+
     return download_thread
 
 def create_actionrow(self, filename):

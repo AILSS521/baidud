@@ -12,7 +12,7 @@ import base64
 import multiprocessing as multiprocessing
 
 class DownloadThread(threading.Thread):
-    def __init__(self, app, url, actionrow, downloadname, download, mode, paused, dir):
+    def __init__(self, app, url, actionrow, downloadname, download, mode, paused, dir, headers=None):
         threading.Thread.__init__(self)
         self.api = app.api
         self.downloaddir = dir
@@ -30,6 +30,7 @@ class DownloadThread(threading.Thread):
         self.paused_because_exceeds_limit = False
         self.total_file_size_text = ""
         self.download_message_shown = False
+        self.headers = headers  # 自定义 HTTP headers（用于百度网盘下载）
         self.download_details = {
             'type': "",
             'status': _("Downloading"),
@@ -126,6 +127,16 @@ class DownloadThread(threading.Thread):
 
             if self.downloadname != None:
                 download_options["out"] = self.downloadname
+
+            # 添加自定义 HTTP headers（用于百度网盘下载）
+            if self.headers:
+                if isinstance(self.headers, dict):
+                    # 将字典格式转换为 aria2c 需要的列表格式
+                    header_list = [f"{key}: {value}" for key, value in self.headers.items()]
+                    download_options["header"] = header_list
+                elif isinstance(self.headers, list):
+                    # 如果已经是列表格式，直接使用
+                    download_options["header"] = self.headers
 
             if self.download == None:
                 self.download = self.api.add_uris([self.url], options=download_options)
