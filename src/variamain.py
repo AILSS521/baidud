@@ -24,6 +24,7 @@ from download.thread import DownloadThread
 from auth.manager import AuthManager
 from api.client import BaiduAPIClient
 from baidu.login import LoginWindow
+from baidu.login_view import LoginView
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 from gi.repository import Gtk, Adw, GLib, Gio, Gdk
@@ -43,9 +44,80 @@ class MainWindow(application_window):
     def __init__(self, variaapp, appdir, appconf, first_run, aria2c_subprocess, aria2cexec, ffmpegexec, issnap, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+        # 保存初始化参数
+        self.variaapp = variaapp
+        self.appdir = appdir
+        self.appconf = appconf
+        self.first_run = first_run
+        self.aria2c_subprocess = aria2c_subprocess
+        self.aria2cexec = aria2cexec
+        self.ffmpegexec = ffmpegexec
+        self.issnap = issnap
+
+        # 初始化基础属性
+        self.scheduler_currently_downloading = False
+        self.bindir = aria2cexec[:-6]
+        self.remote_successful = False
+        self.update_executable = None
+        self.tray_connection_thread_stop = False
+        self.tray_process = None
+        self.ip_geolocation_cache = {}
+        self.tray_notification = False
+        self.main_interface_initialized = False
+
         # 初始化百度网盘认证系统
         self.auth = AuthManager()
         self.api_client = BaiduAPIClient(self.auth)
+
+        # 创建视图切换容器
+        self.view_stack = Gtk.Stack()
+        self.view_stack.set_transition_type(Gtk.StackTransitionType.CROSSFADE)
+        self.view_stack.set_transition_duration(300)
+
+        # 检查登录状态
+        if not self.auth.is_authenticated():
+            # 创建登录视图
+            self.login_view = LoginView(self, self.auth, self._on_login_success)
+            self.view_stack.add_named(self.login_view, "login")
+
+            # 创建空的主界面容器（稍后初始化）
+            self.main_container = Gtk.Box()
+            self.view_stack.add_named(self.main_container, "main")
+
+            # 显示登录视图
+            self.view_stack.set_visible_child_name("login")
+        else:
+            # 已登录，直接初始化主界面
+            self.main_container = Gtk.Box()
+            self.view_stack.add_named(self.main_container, "main")
+            self._initialize_main_interface()
+            self.view_stack.set_visible_child_name("main")
+
+        # 设置窗口内容
+        self.set_content(self.view_stack)
+
+        # 窗口事件连接
+        self.connect('close-request', self.exit_or_tray, variaapp)
+
+        # 显示窗口
+        self.present()
+
+    def _on_login_success(self):
+        """登录成功回调 - 初始化主界面并切换视图"""
+        # 清理登录视图
+        if hasattr(self, 'login_view'):
+            self.login_view.cleanup()
+
+        # 初始化主界面
+        self._initialize_main_interface()
+
+        # 切换到主界面
+        self.view_stack.set_visible_child_name("main")
+
+    def _initialize_main_interface(self):
+        """初始化主界面和 aria2"""
+        if self.main_interface_initialized:
+            return
 
         from window.sidebar_baidu import window_create_sidebar_baidu
         from window.content import window_create_content
@@ -55,27 +127,14 @@ class MainWindow(application_window):
         from download.listen import listen_to_aria2
         from download.scheduler import schedule_downloads
 
-        self.scheduler_currently_downloading = False
-        self.appdir = appdir
-        self.appconf = appconf
-        self.aria2c_subprocess = aria2c_subprocess
-        self.bindir = aria2cexec[:-6]
-        self.aria2cexec = aria2cexec
-        self.remote_successful = False
-        self.update_executable = None
-        self.ffmpegexec = ffmpegexec
-        self.tray_connection_thread_stop = False
-        self.tray_process = None
-        self.ip_geolocation_cache = {}
-
         # Set up variables and all:
-        aria2_connection_successful = initiate(self, variaapp, variaVersion, first_run, issnap)
+        aria2_connection_successful = initiate(self, self.variaapp, variaVersion, self.first_run, self.issnap)
 
         if (aria2_connection_successful == -1):
             return
 
-        # Create window contents:
-        window_create_sidebar_baidu(self, variaapp, variaVersion)
+        # Create window contents in main_container:
+        window_create_sidebar_baidu(self, self.variaapp, variaVersion)
         window_create_content(self)
 
         if self.appconf["schedule_enabled"] == 1:
@@ -99,15 +158,10 @@ class MainWindow(application_window):
         if ((self.appconf["download_speed_limit_enabled"] == "1") and (self.appconf["download_speed_limit"][:-1] != "0")):
             set_speed_limit(self, self.appconf["download_speed_limit"])
 
-        # Set download speed limit from appconf:
-        if ((self.appconf["download_speed_limit_enabled"] == "1") and (self.appconf["download_speed_limit"][:-1] != "0")):
-            set_speed_limit(self, self.appconf["download_speed_limit"])
-
         # Set download directory from appconf:
         set_aria2c_download_directory(self)
 
         # Set the maximum simultaneous download amount from appconf:
-        #set_aria2c_download_simultaneous_amount(self)
         set_aria2c_custom_global_option(self, "max-concurrent-downloads", str(self.appconf["download_simultaneous_amount"]))
 
         # Set the download segments:
@@ -124,7 +178,7 @@ class MainWindow(application_window):
             set_aria2c_custom_global_option(self, "remote-time", "false")
 
         # Listen to aria2c:
-        thread = threading.Thread(target=lambda: listen_to_aria2(self, variaapp), daemon=True)
+        thread = threading.Thread(target=lambda: listen_to_aria2(self, self.variaapp), daemon=True)
         thread.start()
 
         # Begin the scheduler:
@@ -137,7 +191,7 @@ class MainWindow(application_window):
             icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
             icon_theme.add_search_path("./icons")
             if (self.appconf["check_for_updates_on_startup_enabled"] == '1') and (os.path.exists("./updater-function-enabled")):
-                windows_updater(None, self, variaapp, None, variaVersion, 0)
+                windows_updater(None, self, self.variaapp, None, variaVersion, 0)
 
         # Load incomplete downloads:
         default_state = {"url": None, "filename": None, "type": "regular", "paused": False, "index": 0, "dir": self.appconf["download_directory"]}
@@ -167,28 +221,21 @@ class MainWindow(application_window):
 
         self.check_all_status() # Set Pause All / Resume All button
 
-        self.connect('close-request', self.exit_or_tray, variaapp)
         self.connect("notify::default-width", self.on_window_resize)
         self.connect("notify::maximized", self.on_window_resize)
         GLib.timeout_add(100, self.on_window_resize, None, None)
 
-        self.tray_notification = False
-
-        # 检查百度网盘登录状态
-        if not self.auth.is_authenticated():
-            GLib.idle_add(self.show_login_window)
-
-        self.present()
-
         # Start in background mode if it was enabled in preferences:
         if (self.appconf["default_mode"] == "background"):
             self.suppress_startup_notification = True
-            self.exitProgram(app=self, variaapp=variaapp, background=True)
+            self.exitProgram(app=self, variaapp=self.variaapp, background=True)
         else:
             self.suppress_startup_notification = False
 
         if self.appconf["tray_always_visible"] == "true":
-            self.start_tray_process(variaapp)
+            self.start_tray_process(self.variaapp)
+
+        self.main_interface_initialized = True
 
     def start_tray_process(self, variaapp):
         if self.tray_process == None: # If tray process is not already running
@@ -245,16 +292,6 @@ class MainWindow(application_window):
             tray_process_global = self.tray_process
 
             self.tray_process_connection_thread = threading.Thread(target=tray_process_connection, daemon=True).start()
-
-    def show_login_window(self):
-        """显示百度网盘登录窗口"""
-        def on_login_success():
-            # 登录成功后可以刷新侧边栏用户信息
-            # 这里可以添加UI更新逻辑
-            pass
-
-        login_window = LoginWindow(self, self.auth, on_login_success)
-        login_window.present()
 
     def add_baidu_download_task(self, file_info):
         """
